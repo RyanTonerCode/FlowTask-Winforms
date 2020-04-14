@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using FlowTask_Backend;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid.Interactivity;
 using Syncfusion.WinForms.Input;
 
@@ -16,23 +17,6 @@ namespace FlowTask_WinForms_Frontent
         {
             InitializeComponent();
 
-            sfCalendarOverview.Style.BorderColor = ColorTranslator.FromHtml("#FFDFDFDF");
-            sfCalendarOverview.Style.Cell.CellBackColor = ColorTranslator.FromHtml("#FF555555");
-            sfCalendarOverview.Style.Cell.CellForeColor = ColorTranslator.FromHtml("#FFFFFFFF");
-            sfCalendarOverview.Style.Cell.SelectedCellBorderColor = ColorTranslator.FromHtml("#0078d7");
-            sfCalendarOverview.Style.Cell.SelectedCellBackColor = ColorTranslator.FromHtml("#FF0078D7");
-
-            sfCalendarOverview.Style.Cell.SelectedCellForeColor = ColorTranslator.FromHtml("#FFFFFFFF");
-            sfCalendarOverview.Style.Cell.TrailingCellBackColor = ColorTranslator.FromHtml("#FF555555");
-            sfCalendarOverview.Style.Header.BackColor = ColorTranslator.FromHtml("#FF555555");
-            sfCalendarOverview.Style.Header.ForeColor = ColorTranslator.FromHtml("#FFDFDFDF");
-            sfCalendarOverview.Style.Header.HoverForeColor = ColorTranslator.FromHtml("#FFFFFFFF");
-            sfCalendarOverview.Style.Header.DayNamesForeColor = ColorTranslator.FromHtml("#FFFFFFFF");
-            sfCalendarOverview.Style.Header.DayNamesBackColor = ColorTranslator.FromHtml("#FF555555");
-
-            sfCalendarOverview.Style.Header.NavigationButtonForeColor = ColorTranslator.FromHtml("#FFDFDFDF");
-            sfCalendarOverview.Style.Header.NavigationButtonHoverForeColor = ColorTranslator.FromHtml("#FFFFFFFF");
-
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
 
             sfDataGrid.DataSource = TaskCollection.ObservableTaskCollection;
@@ -41,34 +25,62 @@ namespace FlowTask_WinForms_Frontent
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name" });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)" });
             sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
+            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Selected", HeaderText = "Remaining Flow Steps" });
 
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
 
-            sfDataGrid.SelectionController = new RowSelectionController(sfDataGrid);
+            //sfDataGrid.SelectionController = new RowSelectionController(sfDataGrid);
+            sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
+
+            sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
+        }
+
+        private void SfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
+        {
+            int index = e.RowIndex - 1;
+
+            if (index == -1)
+                return;
+
+            var color = TaskCollection.ObservableTaskCollection[index].DrawColor;
+            if (e.Column.MappingName != "Selected")
+            {
+                e.Style.BackColor = color;
+
+                
+            }
         }
 
         void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
+            args.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
 
             if (args.IsTrailingDate)
             {
                 // Customize the cell appearance using options from DrawCellEventArgs
                 args.ForeColor = Color.DarkGray;
             }
-            else if (args.Value.Value == (new DateTime(2020, 4, 15, 0, 0, 0, 0)))
+
+            List<SelectableTaskDecorator> to_draw = new List<SelectableTaskDecorator>();
+
+            DateTime here = args.Value.Value;
+
+            foreach (var task in TaskCollection.ObservableTaskCollection)
+                if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
+                    to_draw.Add(task);
+
+            int startPosition = 0;
+
+            foreach (var task in to_draw)
             {
                 args.Handled = true;
 
-                var font = new Font("Arial", 14, FontStyle.Regular);
+                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, Color.Black, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-                string text = "shit due!";
 
-                Size s = TextRenderer.MeasureText(text, font);
-
-                //args.Graphics.DrawString(text, font, new SolidBrush(Color.White), args.CellBounds.Left + s.Width / 2, args.CellBounds.Top + s.Height / 2, );
-                // Customize the cell appearance by your own drawing using Graphics and Bounds of cell from DrawCellEventArgs
-
-                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, Color.White, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+                args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
+                startPosition -= 18;
             }
 
         }
@@ -94,7 +106,10 @@ namespace FlowTask_WinForms_Frontent
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-           lblTasks.Text = string.Format("You have {0} task{1}!", TaskCollection.ObservableTaskCollection.Count, (TaskCollection.ObservableTaskCollection.Count == 1 ? "" : "s"));
+            if(TaskCollection.ObservableTaskCollection.Count == 0)
+                lblTasks.Text = "Congrats, you have no tasks left!";
+            else
+                lblTasks.Text = string.Format("You have {0} task{1}!", TaskCollection.ObservableTaskCollection.Count, (TaskCollection.ObservableTaskCollection.Count == 1 ? "" : "s"));
         }
 
         private void btnCreateTask_Click(object sender, EventArgs e)

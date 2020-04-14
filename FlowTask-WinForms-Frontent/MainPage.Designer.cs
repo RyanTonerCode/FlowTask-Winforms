@@ -91,7 +91,7 @@
             // sfCalendarOverview
             // 
             this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
-            this.sfCalendarOverview.Location = new System.Drawing.Point(625, 27);
+            this.sfCalendarOverview.Location = new System.Drawing.Point(779, 27);
             this.sfCalendarOverview.Name = "sfCalendarOverview";
             this.sfCalendarOverview.Size = new System.Drawing.Size(504, 510);
             this.sfCalendarOverview.TabIndex = 6;
@@ -107,10 +107,10 @@
             this.sfDataGrid.AutoGenerateColumns = false;
             this.sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             this.sfDataGrid.BackColor = System.Drawing.SystemColors.Window;
-            this.sfDataGrid.Location = new System.Drawing.Point(30, 120);
+            this.sfDataGrid.Location = new System.Drawing.Point(30, 122);
             this.sfDataGrid.Name = "sfDataGrid";
             this.sfDataGrid.RowHeight = 21;
-            this.sfDataGrid.Size = new System.Drawing.Size(556, 300);
+            this.sfDataGrid.Size = new System.Drawing.Size(696, 300);
             this.sfDataGrid.TabIndex = 1;
             this.sfDataGrid.Text = "sfDataGrid1";
             // 

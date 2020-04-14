@@ -32,9 +32,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.cbxCategory = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblDueDate = new System.Windows.Forms.Label();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.lblAssignmentName = new System.Windows.Forms.Label();
             this.tbxName = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,9 +55,9 @@
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox1.Controls.Add(this.dtDate);
             this.groupBox1.Controls.Add(this.cbxCategory);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.lblDueDate);
+            this.groupBox1.Controls.Add(this.lblCategory);
+            this.groupBox1.Controls.Add(this.lblAssignmentName);
             this.groupBox1.Controls.Add(this.tbxName);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(23, 28);
@@ -85,32 +85,32 @@
             this.cbxCategory.Size = new System.Drawing.Size(228, 24);
             this.cbxCategory.TabIndex = 4;
             // 
-            // label3
+            // lblDueDate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 189);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 16);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Due Date";
+            this.lblDueDate.AutoSize = true;
+            this.lblDueDate.Location = new System.Drawing.Point(93, 189);
+            this.lblDueDate.Name = "lblDueDate";
+            this.lblDueDate.Size = new System.Drawing.Size(62, 16);
+            this.lblDueDate.TabIndex = 3;
+            this.lblDueDate.Text = "Due Date";
             // 
-            // label2
+            // lblCategory
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(95, 119);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Category";
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Location = new System.Drawing.Point(95, 127);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(60, 16);
+            this.lblCategory.TabIndex = 2;
+            this.lblCategory.Text = "Category";
             // 
-            // label1
+            // lblAssignmentName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Assignment Name";
+            this.lblAssignmentName.AutoSize = true;
+            this.lblAssignmentName.Location = new System.Drawing.Point(40, 70);
+            this.lblAssignmentName.Name = "lblAssignmentName";
+            this.lblAssignmentName.Size = new System.Drawing.Size(115, 16);
+            this.lblAssignmentName.TabIndex = 1;
+            this.lblAssignmentName.Text = "Assignment Name";
             // 
             // tbxName
             // 
@@ -119,6 +119,7 @@
             this.tbxName.Name = "tbxName";
             this.tbxName.Size = new System.Drawing.Size(228, 22);
             this.tbxName.TabIndex = 0;
+            this.tbxName.TextChanged += new System.EventHandler(this.tbxName_TextChanged);
             // 
             // TaskCreate
             // 
@@ -141,9 +142,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dtDate;
         private System.Windows.Forms.ComboBox cbxCategory;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblDueDate;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.Label lblAssignmentName;
         private System.Windows.Forms.TextBox tbxName;
     }
 }
