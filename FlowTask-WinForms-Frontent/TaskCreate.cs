@@ -26,7 +26,7 @@ namespace FlowTask_WinForms_Frontent
 
             Task newTask = new Task(name, date, cat, Mediator.Me.UserId);
 
-            (bool result, string error) = DatabaseController.dbController.WriteTask(newTask, Mediator.ac);
+            (bool result, string error, int id) = DatabaseController.dbController.WriteTask(newTask, Mediator.ac);
 
             if (result == false)
             {
@@ -35,6 +35,8 @@ namespace FlowTask_WinForms_Frontent
             }
             else
                 MessageBox.Show(string.Format("Your task {0} has been created!", name), "Task creation succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            newTask.TaskID = id;
 
             TaskCollection.ObservableTaskCollection.Add(new SelectableTaskDecorator(newTask));
         }

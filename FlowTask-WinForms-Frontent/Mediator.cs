@@ -6,8 +6,12 @@ namespace FlowTask_WinForms_Frontent
 {
     public static class Mediator
     {
-        public static User Me;
+        public static void Logout()
+        {
+            Application.Exit();
+        }
 
+        public static User Me;
 
         public static LoginForm login;
         public static RegistrationForm register;
@@ -43,6 +47,12 @@ namespace FlowTask_WinForms_Frontent
                 x.Hide();
         }
 
+        public static void ShowTaskCreate()
+        {
+            if (taskCreate == null || taskCreate.IsDisposed)
+                taskCreate = new TaskCreate();
+            taskCreate.Show();
+        }
 
     }
 }

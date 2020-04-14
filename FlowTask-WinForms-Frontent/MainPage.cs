@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using FlowTask_Backend;
@@ -41,6 +42,7 @@ namespace FlowTask_WinForms_Frontent
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)" });
             sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
 
+            sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
 
             sfDataGrid.SelectionController = new RowSelectionController(sfDataGrid);
         }
@@ -97,7 +99,40 @@ namespace FlowTask_WinForms_Frontent
 
         private void btnCreateTask_Click(object sender, EventArgs e)
         {
-            Mediator.taskCreate.Show();
+            Mediator.ShowTaskCreate();
+        }
+
+        private void btnDeleteClick(object sender, EventArgs e)
+        {
+
+            var to_remove = new List<SelectableTaskDecorator>();
+
+            foreach(SelectableTaskDecorator task in TaskCollection.ObservableTaskCollection)
+            {
+                if (task.Selected)
+                {
+                    DialogResult dr = MessageBox.Show(string.Format("Are you sure you want to delete your task ({0})?", task.AssignmentName), "Please confirm!", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
+
+                    if (dr == DialogResult.Yes)
+                    {
+                        //TaskCollection.ObservableTaskCollection.Remove(task);
+                        DatabaseController.dbController.DeleteTask(task, Mediator.ac);
+
+                        to_remove.Add(task);
+                    }
+                }
+            }
+
+            foreach(var task in to_remove)
+                TaskCollection.ObservableTaskCollection.Remove(task);
+
+            to_remove.Clear();
+        }
+
+        private void btnLogoutClicked(object sender, EventArgs e)
+        {
+            Mediator.Logout();
         }
     }
 }

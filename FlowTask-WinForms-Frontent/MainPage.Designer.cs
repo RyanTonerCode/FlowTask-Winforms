@@ -30,12 +30,12 @@
         {
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblTasks = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.sfCalendarOverview = new Syncfusion.WinForms.Input.SfCalendar();
             this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.btnCreateTask = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,37 +57,36 @@
             this.lblTasks.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblTasks.Location = new System.Drawing.Point(59, 71);
             this.lblTasks.Name = "lblTasks";
-            this.lblTasks.Size = new System.Drawing.Size(156, 22);
+            this.lblTasks.Size = new System.Drawing.Size(224, 22);
             this.lblTasks.TabIndex = 3;
-            this.lblTasks.Text = "You have tasks!";
+            this.lblTasks.Text = "Let\'s make a new Task!";
             // 
-            // button1
+            // btnView
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(30, 503);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 45);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "View Task";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnView.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnView.Location = new System.Drawing.Point(30, 503);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(124, 45);
+            this.btnView.TabIndex = 4;
+            this.btnView.Text = "View Task";
+            this.btnView.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnDelete
             // 
-            this.button2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.button2.FlatAppearance.BorderSize = 2;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(227, 503);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 45);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Delete Task";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(227, 503);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(124, 45);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "Delete Task";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDeleteClick);
             // 
             // sfCalendarOverview
             // 
@@ -118,8 +117,7 @@
             // btnCreateTask
             // 
             this.btnCreateTask.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.btnCreateTask.FlatAppearance.BorderSize = 2;
+            this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateTask.Location = new System.Drawing.Point(426, 503);
@@ -130,31 +128,31 @@
             this.btnCreateTask.UseVisualStyleBackColor = false;
             this.btnCreateTask.Click += new System.EventHandler(this.btnCreateTask_Click);
             // 
-            // button3
+            // btnLogout
             // 
-            this.button3.BackColor = System.Drawing.Color.CadetBlue;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.button3.FlatAppearance.BorderSize = 2;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(462, 60);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 45);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Logout";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnLogout.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Location = new System.Drawing.Point(462, 16);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(124, 45);
+            this.btnLogout.TabIndex = 8;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogoutClicked);
             // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 597);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
             this.Controls.Add(this.sfDataGrid);
             this.Controls.Add(this.sfCalendarOverview);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnView);
             this.Controls.Add(this.lblTasks);
             this.Controls.Add(this.lblWelcome);
             this.Name = "MainPage";
@@ -170,11 +168,11 @@
 
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblTasks;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnDelete;
         private Syncfusion.WinForms.Input.SfCalendar sfCalendarOverview;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
         private System.Windows.Forms.Button btnCreateTask;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
