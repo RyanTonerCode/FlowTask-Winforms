@@ -17,7 +17,12 @@ namespace FlowTask_WinForms_Frontent
         {
             InitializeComponent();
 
+            DoubleBuffered = true;
+
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
+
+            sfCalendarOverview.SelectedDate = DateTime.Today.AddDays(1);
+            sfCalendarOverview.SelectedDate = DateTime.Today;
 
             sfDataGrid.DataSource = TaskCollection.ObservableTaskCollection;
 
@@ -33,6 +38,45 @@ namespace FlowTask_WinForms_Frontent
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
 
             sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
+
+            sfCalendarOverview.SelectionChanged += SfCalendarOverview_SelectionChanged;
+        }
+
+        private void drawDue(DateTime here)
+        {
+            Font f = new Font("Segoe UI Semibold", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font f2 = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+            flowLayout.FlowDirection = FlowDirection.TopDown;
+
+            flowLayout.Controls.Clear();
+            Label header = new Label()
+            {
+                Font = f,
+                AutoSize = true,
+                Text = string.Format("Tasks due on {0}", here.ToString("dddd, dd MMMM yyyy"))
+            };
+
+            flowLayout.Controls.Add(header);
+
+            int number = 0;
+            foreach (var task in TaskCollection.ObservableTaskCollection)
+                if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
+                {
+                    Label info = new Label()
+                    {
+                        Font = f2,
+                        AutoSize = true,
+                        Text = string.Format("{0}. {1} ({2})", ++number, task.AssignmentName, task.Category),
+                        Padding = new Padding(15,0,0,0)
+                    };
+                    flowLayout.Controls.Add(info);
+                }
+        }
+
+        private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
+        {
+            drawDue(sender.SelectedDate.Value);
         }
 
         private void SfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
@@ -46,8 +90,6 @@ namespace FlowTask_WinForms_Frontent
             if (e.Column.MappingName != "Selected")
             {
                 e.Style.BackColor = color;
-
-                
             }
         }
 
@@ -78,7 +120,6 @@ namespace FlowTask_WinForms_Frontent
 
                 TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, Color.Black, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-
                 args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
                 startPosition -= 18;
             }
@@ -102,6 +143,8 @@ namespace FlowTask_WinForms_Frontent
 
             foreach(Task t in Mediator.Me.Tasks)
                 TaskCollection.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
+
+            drawDue(DateTime.Today);
         }
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

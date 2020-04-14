@@ -36,6 +36,7 @@
             this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.btnCreateTask = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnView.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnView.Location = new System.Drawing.Point(30, 503);
+            this.btnView.Location = new System.Drawing.Point(30, 632);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(124, 45);
             this.btnView.TabIndex = 4;
@@ -80,7 +81,7 @@
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(227, 503);
+            this.btnDelete.Location = new System.Drawing.Point(233, 632);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(124, 45);
             this.btnDelete.TabIndex = 5;
@@ -91,7 +92,7 @@
             // sfCalendarOverview
             // 
             this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
-            this.sfCalendarOverview.Location = new System.Drawing.Point(779, 27);
+            this.sfCalendarOverview.Location = new System.Drawing.Point(732, -2);
             this.sfCalendarOverview.Name = "sfCalendarOverview";
             this.sfCalendarOverview.Size = new System.Drawing.Size(504, 510);
             this.sfCalendarOverview.TabIndex = 6;
@@ -107,10 +108,10 @@
             this.sfDataGrid.AutoGenerateColumns = false;
             this.sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             this.sfDataGrid.BackColor = System.Drawing.SystemColors.Window;
-            this.sfDataGrid.Location = new System.Drawing.Point(30, 122);
+            this.sfDataGrid.Location = new System.Drawing.Point(21, 120);
             this.sfDataGrid.Name = "sfDataGrid";
             this.sfDataGrid.RowHeight = 21;
-            this.sfDataGrid.Size = new System.Drawing.Size(696, 300);
+            this.sfDataGrid.Size = new System.Drawing.Size(677, 445);
             this.sfDataGrid.TabIndex = 1;
             this.sfDataGrid.Text = "sfDataGrid1";
             // 
@@ -120,7 +121,7 @@
             this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateTask.Location = new System.Drawing.Point(426, 503);
+            this.btnCreateTask.Location = new System.Drawing.Point(422, 632);
             this.btnCreateTask.Name = "btnCreateTask";
             this.btnCreateTask.Size = new System.Drawing.Size(124, 45);
             this.btnCreateTask.TabIndex = 7;
@@ -142,11 +143,19 @@
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogoutClicked);
             // 
+            // flowLayout
+            // 
+            this.flowLayout.Location = new System.Drawing.Point(732, 524);
+            this.flowLayout.Name = "flowLayout";
+            this.flowLayout.Size = new System.Drawing.Size(504, 192);
+            this.flowLayout.TabIndex = 9;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 597);
+            this.ClientSize = new System.Drawing.Size(1261, 748);
+            this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
             this.Controls.Add(this.sfDataGrid);
@@ -174,5 +183,6 @@
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
         private System.Windows.Forms.Button btnCreateTask;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.FlowLayoutPanel flowLayout;
     }
 }
