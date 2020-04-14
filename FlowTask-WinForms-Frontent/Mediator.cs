@@ -6,13 +6,14 @@ namespace FlowTask_WinForms_Frontent
 {
     public static class Mediator
     {
-        public static User me;
+        public static User Me;
 
 
         public static LoginForm login;
         public static RegistrationForm register;
         public static MainPage main;
 
+        public static AuthorizationCookie ac;
 
         private static Form Caller;
 
@@ -24,6 +25,9 @@ namespace FlowTask_WinForms_Frontent
                 subjects = new List<Form>();
 
             Caller = caller;
+
+            subject.Location = caller.Location;
+
             caller.Hide();
             subject.Show();
 

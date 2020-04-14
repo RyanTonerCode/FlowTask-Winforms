@@ -33,5 +33,10 @@ namespace FlowTask_WinForms_Frontent
 
             Mediator.ShowCaller();
         }
+
+        private void btnEscape_Click(object sender, EventArgs e)
+        {
+            Mediator.ShowCaller();
+        }
     }
 }

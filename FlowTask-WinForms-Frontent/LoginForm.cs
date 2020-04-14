@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using FlowTask_Backend;
 
 namespace FlowTask_WinForms_Frontent
 {
@@ -18,33 +19,34 @@ namespace FlowTask_WinForms_Frontent
             string username = tbxUsername.Text;
             if (string.IsNullOrEmpty(username))
             {
-                
+                lblUsername.ForeColor = System.Drawing.Color.Magenta;
                 MessageBox.Show("Username cannot be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string password = tbxPassword.Text;
             if (string.IsNullOrEmpty(password))
             {
+                lblPassword.ForeColor = System.Drawing.Color.Magenta;
                 MessageBox.Show("Password cannot be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
-            var user = FlowTask_Backend.DatabaseController.dbController.GetUser(username, password);
+            var user = DatabaseController.dbController.GetUser(username, password);
 
-            /*
-            if (user == null)
+            
+            if (user.user == null)
             {
                 MessageBox.Show("Please check your credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblPassword.ForeColor = System.Drawing.Color.Red;
+                lblUsername.ForeColor = System.Drawing.Color.Red;
                 return;
             }
 
-            Mediator.me = user;
+            Mediator.Me = user.user;
+            Mediator.ac = user.ac;
 
-            Mediator.ShowForm(this, Mediator.main);*/
+            Mediator.ShowForm(this, Mediator.main);
         }
-
-
 
     }
 }

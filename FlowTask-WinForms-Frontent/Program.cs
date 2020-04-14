@@ -19,6 +19,8 @@ namespace FlowTask_WinForms_Frontent
 
             LoginForm entry = new LoginForm();
 
+            entry.Location = new System.Drawing.Point(100, 100);
+
             Mediator.login = entry;
             Mediator.register = new RegistrationForm();
             Mediator.main = new MainPage();
