@@ -36,7 +36,10 @@
             this.lblTasks = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.sfCalendarOverview = new Syncfusion.WinForms.Input.SfCalendar();
+            this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -61,9 +64,9 @@
             this.AssignmentName,
             this.Category,
             this.DueDate});
-            this.dgTasks.Location = new System.Drawing.Point(30, 159);
+            this.dgTasks.Location = new System.Drawing.Point(324, 12);
             this.dgTasks.Name = "dgTasks";
-            this.dgTasks.Size = new System.Drawing.Size(627, 364);
+            this.dgTasks.Size = new System.Drawing.Size(306, 98);
             this.dgTasks.TabIndex = 2;
             // 
             // AssignmentName
@@ -113,11 +116,40 @@
             this.button2.Text = "Delete Task";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // sfCalendarOverview
+            // 
+            this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
+            this.sfCalendarOverview.Location = new System.Drawing.Point(682, 62);
+            this.sfCalendarOverview.Name = "sfCalendarOverview";
+            this.sfCalendarOverview.Size = new System.Drawing.Size(504, 510);
+            this.sfCalendarOverview.TabIndex = 6;
+            this.sfCalendarOverview.Text = "sfCalendar1";
+            // 
+            // sfDataGrid
+            // 
+            this.sfDataGrid.AccessibleName = "Table";
+            this.sfDataGrid.AllowDraggingColumns = true;
+            this.sfDataGrid.AllowFiltering = true;
+            this.sfDataGrid.AllowResizingColumns = true;
+            this.sfDataGrid.AllowResizingHiddenColumns = true;
+            this.sfDataGrid.AutoGenerateColumns = false;
+            this.sfDataGrid.BackColor = System.Drawing.SystemColors.Window;
+            this.sfDataGrid.Location = new System.Drawing.Point(30, 194);
+            this.sfDataGrid.Name = "sfDataGrid";
+            this.sfDataGrid.RowHeight = 21;
+            this.sfDataGrid.Size = new System.Drawing.Size(583, 300);
+            this.sfDataGrid.TabIndex = 1;
+            this.sfDataGrid.Text = "sfDataGrid1";
+            this.sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 597);
+            this.ClientSize = new System.Drawing.Size(1213, 597);
+            this.Controls.Add(this.sfDataGrid);
+            this.Controls.Add(this.sfCalendarOverview);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblTasks);
@@ -127,6 +159,7 @@
             this.Text = "FlowTask";
             this.Load += new System.EventHandler(this.MainPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgTasks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +175,7 @@
         private System.Windows.Forms.Label lblTasks;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private Syncfusion.WinForms.Input.SfCalendar sfCalendarOverview;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
     }
 }
