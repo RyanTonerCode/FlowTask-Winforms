@@ -83,6 +83,7 @@
             this.tbxPassword.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPassword.Location = new System.Drawing.Point(102, 76);
             this.tbxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbxPassword.MaxLength = 30;
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.Size = new System.Drawing.Size(202, 22);
             this.tbxPassword.TabIndex = 6;
@@ -103,6 +104,7 @@
             this.tbxUsername.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUsername.Location = new System.Drawing.Point(102, 28);
             this.tbxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(202, 22);
             this.tbxUsername.TabIndex = 4;

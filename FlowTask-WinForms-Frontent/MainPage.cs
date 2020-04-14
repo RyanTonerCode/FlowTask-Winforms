@@ -81,9 +81,8 @@ namespace FlowTask_WinForms_Frontent
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            dgTasks.Font = new System.Drawing.Font("Arial", 13);
             lblWelcome.Text = "Welcome to FlowTask " + Mediator.Me.Username + "!";
-            lblTasks.Text = string.Format("You have {0} task{1}!", Mediator.Me.Tasks.Count, (Mediator.Me.Tasks.Count > 1 ? "s" : ""));
+            lblTasks.Text = string.Format("You have {0} task{1}!", Mediator.Me.Tasks.Count, (Mediator.Me.Tasks.Count == 1 ? "" : "s"));
 
             foreach(Task t in Mediator.Me.Tasks)
             {

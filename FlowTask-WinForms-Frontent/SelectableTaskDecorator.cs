@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FlowTask_Backend;
+﻿using FlowTask_Backend;
 
 namespace FlowTask_WinForms_Frontent
 {
