@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlRegister = new System.Windows.Forms.Panel();
             this.tbxEmail = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.tbxConfirmPassword = new System.Windows.Forms.TextBox();
@@ -44,7 +44,7 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnEscape = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.pnlRegister.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -57,28 +57,28 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "FlowTask Registration";
             // 
-            // panel1
+            // pnlRegister
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.tbxEmail);
-            this.panel1.Controls.Add(this.lblEmail);
-            this.panel1.Controls.Add(this.tbxConfirmPassword);
-            this.panel1.Controls.Add(this.lblConfirmPassword);
-            this.panel1.Controls.Add(this.tbxLastName);
-            this.panel1.Controls.Add(this.tbxFirstName);
-            this.panel1.Controls.Add(this.lblLastName);
-            this.panel1.Controls.Add(this.lblFirstName);
-            this.panel1.Controls.Add(this.tbxPassword);
-            this.panel1.Controls.Add(this.lblPassword);
-            this.panel1.Controls.Add(this.tbxUsername);
-            this.panel1.Controls.Add(this.lblUsername);
-            this.panel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(36, 82);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(454, 319);
-            this.panel1.TabIndex = 2;
+            this.pnlRegister.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlRegister.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRegister.Controls.Add(this.tbxEmail);
+            this.pnlRegister.Controls.Add(this.lblEmail);
+            this.pnlRegister.Controls.Add(this.tbxConfirmPassword);
+            this.pnlRegister.Controls.Add(this.lblConfirmPassword);
+            this.pnlRegister.Controls.Add(this.tbxLastName);
+            this.pnlRegister.Controls.Add(this.tbxFirstName);
+            this.pnlRegister.Controls.Add(this.lblLastName);
+            this.pnlRegister.Controls.Add(this.lblFirstName);
+            this.pnlRegister.Controls.Add(this.tbxPassword);
+            this.pnlRegister.Controls.Add(this.lblPassword);
+            this.pnlRegister.Controls.Add(this.tbxUsername);
+            this.pnlRegister.Controls.Add(this.lblUsername);
+            this.pnlRegister.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlRegister.Location = new System.Drawing.Point(36, 82);
+            this.pnlRegister.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlRegister.Name = "pnlRegister";
+            this.pnlRegister.Size = new System.Drawing.Size(454, 319);
+            this.pnlRegister.TabIndex = 2;
             // 
             // tbxEmail
             // 
@@ -89,7 +89,7 @@
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(235, 22);
             this.tbxEmail.TabIndex = 15;
-            this.tbxEmail.TextChanged += new System.EventHandler(this.tbxUsername_TextChanged);
+            this.tbxEmail.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblEmail
             // 
@@ -132,7 +132,7 @@
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.Size = new System.Drawing.Size(235, 22);
             this.tbxLastName.TabIndex = 11;
-            this.tbxLastName.TextChanged += new System.EventHandler(this.tbxUsername_TextChanged);
+            this.tbxLastName.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // tbxFirstName
             // 
@@ -143,7 +143,7 @@
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.Size = new System.Drawing.Size(235, 22);
             this.tbxFirstName.TabIndex = 10;
-            this.tbxFirstName.TextChanged += new System.EventHandler(this.tbxUsername_TextChanged);
+            this.tbxFirstName.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblLastName
             // 
@@ -196,7 +196,7 @@
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(235, 22);
             this.tbxUsername.TabIndex = 4;
-            this.tbxUsername.TextChanged += new System.EventHandler(this.tbxUsername_TextChanged);
+            this.tbxUsername.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblUsername
             // 
@@ -218,7 +218,7 @@
             this.btnCreate.TabIndex = 2;
             this.btnCreate.Text = "Create Account";
             this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.button1_Click);
+            this.btnCreate.Click += new System.EventHandler(this.btnCreateClicked);
             // 
             // btnEscape
             // 
@@ -239,14 +239,14 @@
             this.ClientSize = new System.Drawing.Size(520, 478);
             this.Controls.Add(this.btnEscape);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlRegister);
             this.Controls.Add(this.btnCreate);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "RegistrationForm";
             this.Text = "RegistrationForm";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlRegister.ResumeLayout(false);
+            this.pnlRegister.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,7 +255,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlRegister;
         private System.Windows.Forms.TextBox tbxPassword;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox tbxUsername;

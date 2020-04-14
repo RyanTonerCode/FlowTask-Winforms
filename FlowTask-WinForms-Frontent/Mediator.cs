@@ -12,6 +12,7 @@ namespace FlowTask_WinForms_Frontent
         public static LoginForm login;
         public static RegistrationForm register;
         public static MainPage main;
+        public static TaskCreate taskCreate;
 
         public static AuthorizationCookie ac;
 

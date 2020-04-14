@@ -1,16 +1,16 @@
-using FlowTask_Backend;
 using System.Collections.ObjectModel;
 
 namespace FlowTask_WinForms_Frontent
 {
-    public class TaskCollection
+    public static class TaskCollection
     {
-        public TaskCollection()
-        {
-            TaskDetails = new ObservableCollection<SelectableTaskDecorator>();
-        }
+        private static ObservableCollection<SelectableTaskDecorator> singleton;
 
-        public ObservableCollection<SelectableTaskDecorator> TaskDetails { get; set; }
+
+        public static ObservableCollection<SelectableTaskDecorator> ObservableTaskCollection { get {
+                return singleton ?? (singleton = new ObservableCollection<SelectableTaskDecorator>());
+            }
+        }
     }
 
 }

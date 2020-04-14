@@ -10,7 +10,6 @@ namespace FlowTask_WinForms_Frontent
 {
     public partial class MainPage : Form
     {
-        TaskCollection ObservableTaskData = new TaskCollection();
 
         public MainPage()
         {
@@ -35,7 +34,7 @@ namespace FlowTask_WinForms_Frontent
 
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
 
-            sfDataGrid.DataSource = ObservableTaskData.TaskDetails;
+            sfDataGrid.DataSource = TaskCollection.ObservableTaskCollection;
 
             sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(14, 14) });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name" });
@@ -58,14 +57,16 @@ namespace FlowTask_WinForms_Frontent
             {
                 args.Handled = true;
 
-                var font = new Font("Arial", 8, FontStyle.Regular);
+                var font = new Font("Arial", 14, FontStyle.Regular);
 
                 string text = "shit due!";
 
                 Size s = TextRenderer.MeasureText(text, font);
 
-                args.Graphics.DrawString(text, font, new SolidBrush(Color.White), args.CellBounds.Left + s.Width / 2, args.CellBounds.Top + s.Height / 2);
+                //args.Graphics.DrawString(text, font, new SolidBrush(Color.White), args.CellBounds.Left + s.Width / 2, args.CellBounds.Top + s.Height / 2, );
                 // Customize the cell appearance by your own drawing using Graphics and Bounds of cell from DrawCellEventArgs
+
+                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, Color.White, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
             }
 
         }
@@ -82,12 +83,21 @@ namespace FlowTask_WinForms_Frontent
         private void MainPage_Load(object sender, EventArgs e)
         {
             lblWelcome.Text = "Welcome to FlowTask " + Mediator.Me.Username + "!";
-            lblTasks.Text = string.Format("You have {0} task{1}!", Mediator.Me.Tasks.Count, (Mediator.Me.Tasks.Count == 1 ? "" : "s"));
+
+            TaskCollection.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
 
             foreach(Task t in Mediator.Me.Tasks)
-            {
-                ObservableTaskData.TaskDetails.Add(new SelectableTaskDecorator(t));
-            }
+                TaskCollection.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
+        }
+
+        private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+           lblTasks.Text = string.Format("You have {0} task{1}!", TaskCollection.ObservableTaskCollection.Count, (TaskCollection.ObservableTaskCollection.Count == 1 ? "" : "s"));
+        }
+
+        private void btnCreateTask_Click(object sender, EventArgs e)
+        {
+            Mediator.taskCreate.Show();
         }
     }
 }
