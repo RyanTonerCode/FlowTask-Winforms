@@ -17,6 +17,7 @@ namespace FlowTask_WinForms_Frontent
         public static RegistrationForm register;
         public static MainPage main;
         public static TaskCreate taskCreate;
+        public static ViewTask viewTask;
 
         public static AuthorizationCookie ac;
 
@@ -52,6 +53,13 @@ namespace FlowTask_WinForms_Frontent
             if (taskCreate == null || taskCreate.IsDisposed)
                 taskCreate = new TaskCreate();
             taskCreate.Show();
+        }
+
+        public static void ShowViewTask()
+        {
+            if (viewTask == null || viewTask.IsDisposed)
+                viewTask = new ViewTask();
+            viewTask.Show();
         }
 
     }

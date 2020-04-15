@@ -64,7 +64,7 @@
             // 
             // btnView
             // 
-            this.btnView.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnView.BackColor = System.Drawing.Color.LightBlue;
             this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnView.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -74,10 +74,11 @@
             this.btnView.TabIndex = 4;
             this.btnView.Text = "View Task";
             this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnDelete.BackColor = System.Drawing.Color.LightBlue;
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,7 +118,7 @@
             // 
             // btnCreateTask
             // 
-            this.btnCreateTask.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnCreateTask.BackColor = System.Drawing.Color.LightBlue;
             this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -131,11 +132,11 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnLogout.BackColor = System.Drawing.Color.LightBlue;
             this.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(462, 16);
+            this.btnLogout.Location = new System.Drawing.Point(574, 16);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(124, 45);
             this.btnLogout.TabIndex = 8;
@@ -145,16 +146,17 @@
             // 
             // flowLayout
             // 
-            this.flowLayout.Location = new System.Drawing.Point(732, 524);
+            this.flowLayout.Location = new System.Drawing.Point(732, 506);
+            this.flowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(504, 192);
+            this.flowLayout.Size = new System.Drawing.Size(504, 242);
             this.flowLayout.TabIndex = 9;
             // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1261, 748);
+            this.ClientSize = new System.Drawing.Size(1234, 748);
             this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
@@ -164,6 +166,7 @@
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.lblTasks);
             this.Controls.Add(this.lblWelcome);
+            this.DoubleBuffered = true;
             this.Name = "MainPage";
             this.Text = "FlowTask";
             this.Load += new System.EventHandler(this.MainPage_Load);

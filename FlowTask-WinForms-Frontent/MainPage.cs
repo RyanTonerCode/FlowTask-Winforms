@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using FlowTask_Backend;
 using Syncfusion.WinForms.DataGrid;
@@ -49,12 +50,20 @@ namespace FlowTask_WinForms_Frontent
 
             flowLayout.FlowDirection = FlowDirection.TopDown;
 
+            flowLayout.ForeColor = Color.White;
+            flowLayout.BackColor = Color.White;
+
             flowLayout.Controls.Clear();
             Label header = new Label()
             {
                 Font = f,
-                AutoSize = true,
-                Text = string.Format("Tasks due on {0}", here.ToString("dddd, dd MMMM yyyy"))
+                Text = string.Format("Tasks due on {0}", here.ToString("dddd, dd MMMM yyyy")),
+                Padding = new Padding(4, 4, 4, 4),
+                Height = 40,
+                Width = flowLayout.Width,
+                ForeColor = Color.Black,
+                BackColor = Color.LightBlue,
+                BorderStyle = BorderStyle.FixedSingle,
             };
 
             flowLayout.Controls.Add(header);
@@ -66,9 +75,13 @@ namespace FlowTask_WinForms_Frontent
                     Label info = new Label()
                     {
                         Font = f2,
-                        AutoSize = true,
                         Text = string.Format("{0}. {1} ({2})", ++number, task.AssignmentName, task.Category),
-                        Padding = new Padding(15,0,0,0)
+                        Padding = new Padding(15, 4, 4, 4),
+                        Height = 35,
+                        BackColor = Color.White,
+                        ForeColor = task.DrawColor,
+                        Width = flowLayout.Width,
+                        BorderStyle = BorderStyle.FixedSingle
                     };
                     flowLayout.Controls.Add(info);
                 }
@@ -153,6 +166,8 @@ namespace FlowTask_WinForms_Frontent
                 lblTasks.Text = "Congrats, you have no tasks left!";
             else
                 lblTasks.Text = string.Format("You have {0} task{1}!", TaskCollection.ObservableTaskCollection.Count, (TaskCollection.ObservableTaskCollection.Count == 1 ? "" : "s"));
+
+            drawDue(sfCalendarOverview.SelectedDate.Value);
         }
 
         private void btnCreateTask_Click(object sender, EventArgs e)
@@ -191,6 +206,11 @@ namespace FlowTask_WinForms_Frontent
         private void btnLogoutClicked(object sender, EventArgs e)
         {
             Mediator.Logout();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
