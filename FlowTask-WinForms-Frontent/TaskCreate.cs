@@ -7,12 +7,12 @@ namespace FlowTask_WinForms_Frontent
 {
     public partial class TaskCreate : Form
     {
-        public TaskCreate()
+        public TaskCreate(DateTime? initial)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
 
-            dtDate.Value = DateTime.Now.AddDays(14);
+            dtDate.Value = initial ?? DateTime.Now.AddDays(14);
             cbxCategory.SelectedIndex = 0;
         }
 

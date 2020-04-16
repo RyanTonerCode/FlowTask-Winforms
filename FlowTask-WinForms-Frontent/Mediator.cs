@@ -1,4 +1,5 @@
 ﻿using FlowTask_Backend;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -48,10 +49,10 @@ namespace FlowTask_WinForms_Frontent
                 x.Hide();
         }
 
-        public static void ShowTaskCreate()
+        public static void ShowTaskCreate(DateTime? initial)
         {
             if (taskCreate == null || taskCreate.IsDisposed)
-                taskCreate = new TaskCreate();
+                taskCreate = new TaskCreate(initial);
             taskCreate.Show();
         }
 

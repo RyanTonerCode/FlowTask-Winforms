@@ -32,7 +32,7 @@
             this.lblTasks = new System.Windows.Forms.Label();
             this.btnView = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.sfCalendarOverview = new Syncfusion.WinForms.Input.SfCalendar();
+            this.sfTaskCalendar = new Syncfusion.WinForms.Input.SfCalendar();
             this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.btnCreateTask = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -92,13 +92,13 @@
             // 
             // sfCalendarOverview
             // 
-            this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
-            this.sfCalendarOverview.Location = new System.Drawing.Point(732, -2);
-            this.sfCalendarOverview.Margin = new System.Windows.Forms.Padding(0);
-            this.sfCalendarOverview.Name = "sfCalendarOverview";
-            this.sfCalendarOverview.Size = new System.Drawing.Size(504, 510);
-            this.sfCalendarOverview.TabIndex = 6;
-            this.sfCalendarOverview.Text = "sfCalendar1";
+            this.sfTaskCalendar.Culture = new System.Globalization.CultureInfo("en-US");
+            this.sfTaskCalendar.Location = new System.Drawing.Point(732, -2);
+            this.sfTaskCalendar.Margin = new System.Windows.Forms.Padding(0);
+            this.sfTaskCalendar.Name = "sfCalendarOverview";
+            this.sfTaskCalendar.Size = new System.Drawing.Size(504, 510);
+            this.sfTaskCalendar.TabIndex = 6;
+            this.sfTaskCalendar.Text = "sfCalendar1";
             // 
             // sfDataGrid
             // 
@@ -159,12 +159,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1234, 748);
             this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
             this.Controls.Add(this.sfDataGrid);
-            this.Controls.Add(this.sfCalendarOverview);
+            this.Controls.Add(this.sfTaskCalendar);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.lblTasks);
@@ -188,7 +189,7 @@
         private System.Windows.Forms.Label lblTasks;
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnDelete;
-        private Syncfusion.WinForms.Input.SfCalendar sfCalendarOverview;
+        private Syncfusion.WinForms.Input.SfCalendar sfTaskCalendar;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
         private System.Windows.Forms.Button btnCreateTask;
         private System.Windows.Forms.Button btnLogout;

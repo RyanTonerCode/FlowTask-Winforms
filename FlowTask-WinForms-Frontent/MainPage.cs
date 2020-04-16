@@ -21,8 +21,8 @@ namespace FlowTask_WinForms_Frontent
             StartPosition = FormStartPosition.CenterScreen;
             DoubleBuffered = true;
 
-            sfCalendarOverview.DrawCell += SfCalendarDrawCell;
-            sfCalendarOverview.SelectionChanged += SfCalendarOverview_SelectionChanged;
+            sfTaskCalendar.DrawCell += SfCalendarDrawCell;
+            sfTaskCalendar.SelectionChanged += SfCalendarOverview_SelectionChanged;
 
             sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
 
@@ -167,12 +167,12 @@ namespace FlowTask_WinForms_Frontent
             else
                 lblTasks.Text = string.Format("You have {0} task{1}!", ObservableCollections.ObservableTaskCollection.Count, (ObservableCollections.ObservableTaskCollection.Count == 1 ? "" : "s"));
 
-            drawDue(sfCalendarOverview.SelectedDate.Value);
+            drawDue(sfTaskCalendar.SelectedDate.Value);
         }
 
         private void btnCreateTask_Click(object sender, EventArgs e)
         {
-            Mediator.ShowTaskCreate();
+            Mediator.ShowTaskCreate(sfTaskCalendar.SelectedDate);
         }
 
         private void btnDeleteClick(object sender, EventArgs e)

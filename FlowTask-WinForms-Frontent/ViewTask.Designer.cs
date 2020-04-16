@@ -29,53 +29,53 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Syncfusion.Windows.Forms.Diagram.Binding binding2 = new Syncfusion.Windows.Forms.Diagram.Binding();
+            Syncfusion.Windows.Forms.Diagram.Binding binding1 = new Syncfusion.Windows.Forms.Diagram.Binding();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewTask));
-            this.diagram1 = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
+            this.sfTreeDiagram = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
             this.model1 = new Syncfusion.Windows.Forms.Diagram.Model(this.components);
-            this.sfCalendarOverview = new Syncfusion.WinForms.Input.SfCalendar();
+            this.sfNodeCalendar = new Syncfusion.WinForms.Input.SfCalendar();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.diagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfTreeDiagram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.model1)).BeginInit();
             this.SuspendLayout();
             // 
-            // diagram1
+            // sfTreeDiagram
             // 
-            this.diagram1.BackColor = System.Drawing.Color.White;
-            binding2.DefaultConnector = null;
-            binding2.DefaultNode = null;
-            binding2.Diagram = this.diagram1;
-            binding2.Id = null;
-            binding2.Label = ((System.Collections.Generic.List<string>)(resources.GetObject("binding2.Label")));
-            binding2.ParentId = null;
-            this.diagram1.Binding = binding2;
-            this.diagram1.Controller.Constraint = Syncfusion.Windows.Forms.Diagram.Constraints.PageEditable;
-            this.diagram1.Controller.DefaultConnectorTool = Syncfusion.Windows.Forms.Diagram.ConnectorTool.OrgLineConnectorTool;
-            this.diagram1.Controller.PasteOffset = new System.Drawing.SizeF(10F, 10F);
-            this.diagram1.EnableTouchMode = false;
-            this.diagram1.HScroll = true;
-            this.diagram1.LayoutManager = null;
-            this.diagram1.Location = new System.Drawing.Point(0, 0);
-            this.diagram1.Margin = new System.Windows.Forms.Padding(0);
-            this.diagram1.MetroScrollBars = true;
-            this.diagram1.Model = this.model1;
-            this.diagram1.Name = "diagram1";
-            this.diagram1.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("diagram1.ScrollVirtualBounds")));
-            this.diagram1.Size = new System.Drawing.Size(1358, 440);
-            this.diagram1.SmartSizeBox = false;
-            this.diagram1.TabIndex = 9;
-            this.diagram1.Text = "diagram1";
+            this.sfTreeDiagram.BackColor = System.Drawing.Color.White;
+            binding1.DefaultConnector = null;
+            binding1.DefaultNode = null;
+            binding1.Diagram = this.sfTreeDiagram;
+            binding1.Id = null;
+            binding1.Label = ((System.Collections.Generic.List<string>)(resources.GetObject("binding1.Label")));
+            binding1.ParentId = null;
+            this.sfTreeDiagram.Binding = binding1;
+            this.sfTreeDiagram.Controller.Constraint = Syncfusion.Windows.Forms.Diagram.Constraints.PageEditable;
+            this.sfTreeDiagram.Controller.DefaultConnectorTool = Syncfusion.Windows.Forms.Diagram.ConnectorTool.OrgLineConnectorTool;
+            this.sfTreeDiagram.Controller.PasteOffset = new System.Drawing.SizeF(10F, 10F);
+            this.sfTreeDiagram.EnableTouchMode = false;
+            this.sfTreeDiagram.HScroll = true;
+            this.sfTreeDiagram.LayoutManager = null;
+            this.sfTreeDiagram.Location = new System.Drawing.Point(0, 0);
+            this.sfTreeDiagram.Margin = new System.Windows.Forms.Padding(0);
+            this.sfTreeDiagram.MetroScrollBars = true;
+            this.sfTreeDiagram.Model = this.model1;
+            this.sfTreeDiagram.Name = "sfTreeDiagram";
+            this.sfTreeDiagram.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("sfTreeDiagram.ScrollVirtualBounds")));
+            this.sfTreeDiagram.Size = new System.Drawing.Size(1358, 383);
+            this.sfTreeDiagram.SmartSizeBox = false;
+            this.sfTreeDiagram.TabIndex = 9;
+            this.sfTreeDiagram.Text = "diagram1";
             // 
             // 
             // 
-            this.diagram1.View.BackgroundColor = System.Drawing.Color.White;
-            this.diagram1.View.ClientRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.diagram1.View.Controller = this.diagram1.Controller;
-            this.diagram1.View.Grid.MinPixelSpacing = 4F;
-            this.diagram1.View.Grid.Visible = false;
-            this.diagram1.View.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("resource.ScrollVirtualBounds")));
-            this.diagram1.View.ZoomType = Syncfusion.Windows.Forms.Diagram.ZoomType.Center;
-            this.diagram1.VScroll = true;
+            this.sfTreeDiagram.View.BackgroundColor = System.Drawing.Color.White;
+            this.sfTreeDiagram.View.ClientRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfTreeDiagram.View.Controller = this.sfTreeDiagram.Controller;
+            this.sfTreeDiagram.View.Grid.MinPixelSpacing = 4F;
+            this.sfTreeDiagram.View.Grid.Visible = false;
+            this.sfTreeDiagram.View.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("resource.ScrollVirtualBounds")));
+            this.sfTreeDiagram.View.ZoomType = Syncfusion.Windows.Forms.Diagram.ZoomType.Center;
+            this.sfTreeDiagram.VScroll = true;
             // 
             // model1
             // 
@@ -94,23 +94,23 @@
             this.model1.ShadowStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.model1.ShadowStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             // 
-            // sfCalendarOverview
+            // sfNodeCalendar
             // 
-            this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
-            this.sfCalendarOverview.Location = new System.Drawing.Point(0, 440);
-            this.sfCalendarOverview.Margin = new System.Windows.Forms.Padding(0);
-            this.sfCalendarOverview.Name = "sfCalendarOverview";
-            this.sfCalendarOverview.NumberOfWeeksInView = 4;
-            this.sfCalendarOverview.Size = new System.Drawing.Size(770, 308);
-            this.sfCalendarOverview.TabIndex = 7;
-            this.sfCalendarOverview.Text = "sfCalendar1";
+            this.sfNodeCalendar.Culture = new System.Globalization.CultureInfo("en-US");
+            this.sfNodeCalendar.Location = new System.Drawing.Point(0, 383);
+            this.sfNodeCalendar.Margin = new System.Windows.Forms.Padding(0);
+            this.sfNodeCalendar.Name = "sfNodeCalendar";
+            this.sfNodeCalendar.NumberOfWeeksInView = 5;
+            this.sfNodeCalendar.Size = new System.Drawing.Size(770, 365);
+            this.sfNodeCalendar.TabIndex = 7;
+            this.sfNodeCalendar.Text = "sfCalendar1";
             // 
             // flowLayout
             // 
-            this.flowLayout.Location = new System.Drawing.Point(770, 440);
+            this.flowLayout.Location = new System.Drawing.Point(770, 383);
             this.flowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(588, 308);
+            this.flowLayout.Size = new System.Drawing.Size(588, 365);
             this.flowLayout.TabIndex = 10;
             // 
             // ViewTask
@@ -119,15 +119,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1358, 747);
             this.Controls.Add(this.flowLayout);
-            this.Controls.Add(this.diagram1);
-            this.Controls.Add(this.sfCalendarOverview);
+            this.Controls.Add(this.sfTreeDiagram);
+            this.Controls.Add(this.sfNodeCalendar);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ViewTask";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ViewTask";
-            ((System.ComponentModel.ISupportInitialize)(this.diagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfTreeDiagram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.model1)).EndInit();
             this.ResumeLayout(false);
 
@@ -135,8 +135,8 @@
 
         #endregion
 
-        private Syncfusion.WinForms.Input.SfCalendar sfCalendarOverview;
-        private Syncfusion.Windows.Forms.Diagram.Controls.Diagram diagram1;
+        private Syncfusion.WinForms.Input.SfCalendar sfNodeCalendar;
+        private Syncfusion.Windows.Forms.Diagram.Controls.Diagram sfTreeDiagram;
         private Syncfusion.Windows.Forms.Diagram.Model model1;
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
     }

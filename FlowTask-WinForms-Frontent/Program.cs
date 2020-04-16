@@ -28,7 +28,6 @@ namespace FlowTask_WinForms_Frontent
             Mediator.login = entry;
             Mediator.register = new RegistrationForm();
             Mediator.main = new MainPage();
-            Mediator.taskCreate = new TaskCreate();
 
             Application.Run(entry);
         }
