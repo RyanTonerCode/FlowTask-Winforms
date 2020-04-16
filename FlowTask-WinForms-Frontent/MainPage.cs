@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using FlowTask_Backend;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.WinForms.DataGrid.Interactivity;
 using Syncfusion.WinForms.Input;
 
 namespace FlowTask_WinForms_Frontent
@@ -22,8 +21,9 @@ namespace FlowTask_WinForms_Frontent
             DoubleBuffered = true;
 
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
+            sfCalendarOverview.SelectionChanged += SfCalendarOverview_SelectionChanged;
 
-            sfDataGrid.DataSource = TaskCollection.ObservableTaskCollection;
+            sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
 
             sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(14, 14) });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name" });
@@ -31,13 +31,9 @@ namespace FlowTask_WinForms_Frontent
             sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Flow Steps", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
 
-            sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Multiple;
-
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
 
             sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
-
-            sfCalendarOverview.SelectionChanged += SfCalendarOverview_SelectionChanged;
 
             sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
 
@@ -78,7 +74,7 @@ namespace FlowTask_WinForms_Frontent
             flowLayout.Controls.Add(header);
 
             int number = 0;
-            foreach (var task in TaskCollection.ObservableTaskCollection)
+            foreach (var task in ObservableCollections.ObservableTaskCollection)
                 if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
                 {
                     Label info = new Label()
@@ -113,7 +109,7 @@ namespace FlowTask_WinForms_Frontent
 
             e.Style.Font = new Syncfusion.WinForms.DataGrid.Styles.GridFontInfo(new Font("Segoe UI", 14, FontStyle.Regular, GraphicsUnit.Point));
 
-            var color = TaskCollection.ObservableTaskCollection[index].DrawColor;
+            var color = ObservableCollections.ObservableTaskCollection[index].DrawColor;
             if (e.Column.MappingName != "Selected")
             {
                 e.Style.BackColor = color;
@@ -135,7 +131,7 @@ namespace FlowTask_WinForms_Frontent
 
             DateTime here = args.Value.Value;
 
-            foreach (var task in TaskCollection.ObservableTaskCollection)
+            foreach (var task in ObservableCollections.ObservableTaskCollection)
                 if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
                     to_draw.Add(task);
 
@@ -157,20 +153,20 @@ namespace FlowTask_WinForms_Frontent
         {
             lblWelcome.Text = "Welcome to FlowTask " + Mediator.Me.Username + "!";
 
-            TaskCollection.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
+            ObservableCollections.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
 
             foreach(Task t in Mediator.Me.Tasks)
-                TaskCollection.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
+                ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
 
             drawDue(DateTime.Today);
         }
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if(TaskCollection.ObservableTaskCollection.Count == 0)
+            if(ObservableCollections.ObservableTaskCollection.Count == 0)
                 lblTasks.Text = "Congrats, you have no tasks left!";
             else
-                lblTasks.Text = string.Format("You have {0} task{1}!", TaskCollection.ObservableTaskCollection.Count, (TaskCollection.ObservableTaskCollection.Count == 1 ? "" : "s"));
+                lblTasks.Text = string.Format("You have {0} task{1}!", ObservableCollections.ObservableTaskCollection.Count, (ObservableCollections.ObservableTaskCollection.Count == 1 ? "" : "s"));
 
             drawDue(sfCalendarOverview.SelectedDate.Value);
         }
@@ -182,7 +178,7 @@ namespace FlowTask_WinForms_Frontent
 
         private void btnDeleteClick(object sender, EventArgs e)
         {
-            var Selected = TaskCollection.ObservableTaskCollection.Where(x => x.Selected);
+            var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);
             if (Selected.Count() == 0) {
                 MessageBox.Show("Please select a task first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -207,7 +203,7 @@ namespace FlowTask_WinForms_Frontent
             }
 
             foreach(var task in to_remove)
-                TaskCollection.ObservableTaskCollection.Remove(task);
+                ObservableCollections.ObservableTaskCollection.Remove(task);
 
             to_remove.Clear();
         }
@@ -219,7 +215,7 @@ namespace FlowTask_WinForms_Frontent
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            var Selected = TaskCollection.ObservableTaskCollection.Where(x => x.Selected);
+            var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);
             if(Selected.Count() == 0)
             {
                 MessageBox.Show("Please select a task first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -43,11 +43,11 @@
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.ForeColor = System.Drawing.Color.Crimson;
             this.lblWelcome.Location = new System.Drawing.Point(26, 27);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(277, 29);
+            this.lblWelcome.Size = new System.Drawing.Size(318, 32);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Welcome to FlowTask, ";
             // 

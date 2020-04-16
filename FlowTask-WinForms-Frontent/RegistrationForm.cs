@@ -94,9 +94,7 @@ namespace FlowTask_WinForms_Frontent
                 if (!pass.Equals(confirm))
                     tbxConfirmPassword.BackColor = Color.Red;
                 else
-                {
                     tbxConfirmPassword.BackColor = Color.White;
-                }
             }
         }
     }

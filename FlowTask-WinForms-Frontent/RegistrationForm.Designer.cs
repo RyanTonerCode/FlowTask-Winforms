@@ -49,7 +49,7 @@
             // 
             // pnlRegister
             // 
-            this.pnlRegister.BackColor = System.Drawing.Color.LightBlue;
+            this.pnlRegister.BackColor = System.Drawing.Color.Azure;
             this.pnlRegister.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRegister.Controls.Add(this.tbxEmail);
             this.pnlRegister.Controls.Add(this.lblEmail);
@@ -73,12 +73,12 @@
             // tbxEmail
             // 
             this.tbxEmail.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxEmail.Location = new System.Drawing.Point(208, 168);
+            this.tbxEmail.Location = new System.Drawing.Point(208, 175);
             this.tbxEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbxEmail.MaxLength = 30;
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(289, 29);
-            this.tbxEmail.TabIndex = 15;
+            this.tbxEmail.TabIndex = 3;
             this.tbxEmail.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblEmail
@@ -96,10 +96,10 @@
             this.tbxConfirmPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxConfirmPassword.Location = new System.Drawing.Point(208, 269);
             this.tbxConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxConfirmPassword.MaxLength = 30;
+            this.tbxConfirmPassword.MaxLength = 10;
             this.tbxConfirmPassword.Name = "tbxConfirmPassword";
             this.tbxConfirmPassword.Size = new System.Drawing.Size(289, 29);
-            this.tbxConfirmPassword.TabIndex = 13;
+            this.tbxConfirmPassword.TabIndex = 5;
             this.tbxConfirmPassword.UseSystemPasswordChar = true;
             this.tbxConfirmPassword.TextChanged += new System.EventHandler(this.tbxConfirmPassword_TextChanged);
             // 
@@ -121,7 +121,7 @@
             this.tbxLastName.MaxLength = 30;
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.Size = new System.Drawing.Size(289, 29);
-            this.tbxLastName.TabIndex = 11;
+            this.tbxLastName.TabIndex = 2;
             this.tbxLastName.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // tbxFirstName
@@ -132,7 +132,7 @@
             this.tbxFirstName.MaxLength = 30;
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.Size = new System.Drawing.Size(289, 29);
-            this.tbxFirstName.TabIndex = 10;
+            this.tbxFirstName.TabIndex = 1;
             this.tbxFirstName.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblLastName
@@ -163,7 +163,7 @@
             this.tbxPassword.MaxLength = 30;
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.Size = new System.Drawing.Size(289, 29);
-            this.tbxPassword.TabIndex = 6;
+            this.tbxPassword.TabIndex = 4;
             this.tbxPassword.UseSystemPasswordChar = true;
             this.tbxPassword.TextChanged += new System.EventHandler(this.tbxConfirmPassword_TextChanged);
             // 
@@ -185,7 +185,7 @@
             this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(289, 29);
-            this.tbxUsername.TabIndex = 4;
+            this.tbxUsername.TabIndex = 0;
             this.tbxUsername.TextChanged += new System.EventHandler(this.tbxTextChanged);
             // 
             // lblUsername
@@ -200,21 +200,23 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnCreate.BackColor = System.Drawing.Color.LightBlue;
+            this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreate.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.Location = new System.Drawing.Point(117, 426);
             this.btnCreate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(164, 43);
-            this.btnCreate.TabIndex = 2;
+            this.btnCreate.TabIndex = 6;
             this.btnCreate.Text = "Create Account";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreateClicked);
             // 
             // btnEscape
             // 
-            this.btnEscape.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnEscape.BackColor = System.Drawing.Color.LightBlue;
+            this.btnEscape.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEscape.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEscape.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEscape.Location = new System.Drawing.Point(416, 426);
@@ -230,7 +232,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label1.ForeColor = System.Drawing.Color.DarkBlue;
             this.label1.Location = new System.Drawing.Point(47, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(290, 32);
@@ -242,7 +244,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(609, 500);
+            this.ClientSize = new System.Drawing.Size(609, 495);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEscape);
             this.Controls.Add(this.pnlRegister);

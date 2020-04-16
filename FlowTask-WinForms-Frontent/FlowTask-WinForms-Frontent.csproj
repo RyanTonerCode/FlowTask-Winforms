@@ -123,8 +123,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NodeDecorator.cs" />
     <Compile Include="SelectableTaskDecorator.cs" />
-    <Compile Include="TaskCollection.cs" />
+    <Compile Include="ObservableCollections.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

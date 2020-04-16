@@ -59,7 +59,7 @@ namespace FlowTask_WinForms_Frontent
             else
                 MessageBox.Show(string.Format("Your task {0} has been created!", name), "Task creation succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            TaskCollection.ObservableTaskCollection.Add(new SelectableTaskDecorator(task_returned));
+            ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(task_returned));
         }
 
         private void tbxName_TextChanged(object sender, EventArgs e)

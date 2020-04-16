@@ -41,37 +41,40 @@
             // 
             // btnCreateTask
             // 
-            this.btnCreateTask.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateTask.Location = new System.Drawing.Point(382, 291);
+            this.btnCreateTask.BackColor = System.Drawing.Color.LightBlue;
+            this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateTask.Location = new System.Drawing.Point(200, 283);
             this.btnCreateTask.Name = "btnCreateTask";
-            this.btnCreateTask.Size = new System.Drawing.Size(123, 38);
+            this.btnCreateTask.Size = new System.Drawing.Size(173, 45);
             this.btnCreateTask.TabIndex = 0;
             this.btnCreateTask.Text = "Create Task";
-            this.btnCreateTask.UseVisualStyleBackColor = true;
+            this.btnCreateTask.UseVisualStyleBackColor = false;
             this.btnCreateTask.Click += new System.EventHandler(this.btnCreateClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.BackColor = System.Drawing.Color.Azure;
             this.groupBox1.Controls.Add(this.dtDate);
             this.groupBox1.Controls.Add(this.cbxCategory);
             this.groupBox1.Controls.Add(this.lblDueDate);
             this.groupBox1.Controls.Add(this.lblCategory);
             this.groupBox1.Controls.Add(this.lblAssignmentName);
             this.groupBox1.Controls.Add(this.tbxName);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(23, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(482, 237);
+            this.groupBox1.Size = new System.Drawing.Size(561, 237);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enter your Task information here!";
             // 
             // dtDate
             // 
-            this.dtDate.Location = new System.Drawing.Point(198, 184);
+            this.dtDate.Location = new System.Drawing.Point(177, 182);
             this.dtDate.Name = "dtDate";
-            this.dtDate.Size = new System.Drawing.Size(228, 22);
+            this.dtDate.Size = new System.Drawing.Size(354, 29);
             this.dtDate.TabIndex = 5;
             // 
             // cbxCategory
@@ -80,44 +83,44 @@
             this.cbxCategory.Items.AddRange(new object[] {
             "Research Paper",
             "Agile Software Project"});
-            this.cbxCategory.Location = new System.Drawing.Point(198, 119);
+            this.cbxCategory.Location = new System.Drawing.Point(177, 124);
             this.cbxCategory.Name = "cbxCategory";
-            this.cbxCategory.Size = new System.Drawing.Size(228, 24);
+            this.cbxCategory.Size = new System.Drawing.Size(354, 30);
             this.cbxCategory.TabIndex = 4;
             // 
             // lblDueDate
             // 
             this.lblDueDate.AutoSize = true;
-            this.lblDueDate.Location = new System.Drawing.Point(93, 189);
+            this.lblDueDate.Location = new System.Drawing.Point(46, 187);
             this.lblDueDate.Name = "lblDueDate";
-            this.lblDueDate.Size = new System.Drawing.Size(62, 16);
+            this.lblDueDate.Size = new System.Drawing.Size(90, 22);
             this.lblDueDate.TabIndex = 3;
             this.lblDueDate.Text = "Due Date";
             // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(95, 127);
+            this.lblCategory.Location = new System.Drawing.Point(49, 127);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(60, 16);
+            this.lblCategory.Size = new System.Drawing.Size(87, 22);
             this.lblCategory.TabIndex = 2;
             this.lblCategory.Text = "Category";
             // 
             // lblAssignmentName
             // 
             this.lblAssignmentName.AutoSize = true;
-            this.lblAssignmentName.Location = new System.Drawing.Point(40, 70);
+            this.lblAssignmentName.Location = new System.Drawing.Point(6, 73);
             this.lblAssignmentName.Name = "lblAssignmentName";
-            this.lblAssignmentName.Size = new System.Drawing.Size(115, 16);
+            this.lblAssignmentName.Size = new System.Drawing.Size(165, 22);
             this.lblAssignmentName.TabIndex = 1;
             this.lblAssignmentName.Text = "Assignment Name";
             // 
             // tbxName
             // 
-            this.tbxName.Location = new System.Drawing.Point(198, 64);
+            this.tbxName.Location = new System.Drawing.Point(177, 70);
             this.tbxName.MaxLength = 50;
             this.tbxName.Name = "tbxName";
-            this.tbxName.Size = new System.Drawing.Size(228, 22);
+            this.tbxName.Size = new System.Drawing.Size(354, 29);
             this.tbxName.TabIndex = 0;
             this.tbxName.TextChanged += new System.EventHandler(this.tbxName_TextChanged);
             // 
@@ -125,7 +128,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 357);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(604, 343);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCreateTask);
             this.Name = "TaskCreate";

@@ -10,8 +10,8 @@ namespace FlowTask_WinForms_Frontent
         {
             InitializeComponent();
 
-            tbxPassword.Text = "test";
-            tbxUsername.Text = "ryanat";
+            tbxUsername.Text = "Default User";
+            tbxPassword.Text = "password";
         }
 
         private void btnRegistration_Click(object sender, EventArgs e) => 
