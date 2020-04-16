@@ -2,11 +2,17 @@ using System.Collections.ObjectModel;
 
 namespace FlowTask_WinForms_Frontent
 {
+    /// <summary>
+    /// Collections of observable elements to be used by the GUI
+    /// </summary>
     public static class ObservableCollections
     {
         private static ObservableCollection<SelectableTaskDecorator> task_singleton;
 
 
+        /// <summary>
+        /// Observable task collection for use in the data grid (single instance)
+        /// </summary>
         public static ObservableCollection<SelectableTaskDecorator> ObservableTaskCollection
         {
             get
@@ -15,6 +21,9 @@ namespace FlowTask_WinForms_Frontent
             }
         }
 
+        /// <summary>
+        /// Obersable collection generator for node view
+        /// </summary>
         public static ObservableCollection<NodeDecorator> ObservableNodeCollection
         {
             get

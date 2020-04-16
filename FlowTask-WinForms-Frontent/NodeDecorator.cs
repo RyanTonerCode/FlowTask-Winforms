@@ -5,8 +5,15 @@ using System.Drawing;
 
 namespace FlowTask_WinForms_Frontent
 {
+    /// <summary>
+    /// Decorates a node with a draw color
+    /// </summary>
     public class NodeDecorator : Node
     {
+        /// <summary>
+        /// create a node decorator for a given node
+        /// </summary>
+        /// <param name="n"></param>
         public NodeDecorator(Node n) : base(n.NodeID, n.Name, n.TimeWeight, n.Complete, n.Date, n.Text, n.GraphID, n.NodeIndex)
         {
 
@@ -14,35 +21,42 @@ namespace FlowTask_WinForms_Frontent
 
         private Color c = Color.FromArgb(0, 0, 0);
 
+        /// <summary>
+        /// Retrieve a color for this node
+        /// </summary>
         public Color DrawColor
         {
             get
             {
                 if (c != Color.FromArgb(0, 0, 0))
                     return c;
-                return (c = RandColor());
+                return (c = randColor());
             }
         }
 
         static readonly List<string> UsedColors = new List<string>();
 
-        private Color RandColor()
+        static readonly Random randy = new Random();
+
+        /// <summary>
+        /// Generate a random and unused node color
+        /// </summary>
+        /// <returns></returns>
+        private Color randColor()
         {
-            Random x = new Random();
             int r, g, b;
-            Color myRgbColor = new Color();
             while (true)
             {
-                r = x.Next(100, 200);
-                g = x.Next(100, 200);
-                b = x.Next(100, 200);
+                r = randy.Next(100, 200);
+                g = randy.Next(100, 200);
+                b = randy.Next(100, 200);
                 if (!UsedColors.Contains(r + "," + g + "," + b))
                 {
                     UsedColors.Add(r + "," + g + "," + b);
                     break;
                 }
             }
-            myRgbColor = Color.FromArgb(r, g, b);
+            Color myRgbColor = Color.FromArgb(r, g, b);
             return myRgbColor;
         }
     }

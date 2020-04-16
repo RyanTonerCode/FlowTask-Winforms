@@ -7,22 +7,20 @@ namespace FlowTask_WinForms_Frontent
 {
     public partial class TaskCreationForm : Form
     {
-        public TaskCreationForm(DateTime? initial)
+        public TaskCreationForm(DateTime? selectedDate)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
 
-            dtDate.Value = initial ?? DateTime.Now.AddDays(14);
+            //default date value to two weeks from now if none is provided.
+            dtDate.Value = selectedDate ?? DateTime.Now.AddDays(14);
+            //default the seledcted index
             cbxCategory.SelectedIndex = 0;
-        }
-
-        private void btnEscape_Click(object sender, EventArgs e)
-        {
-            Mediator.ShowCaller();
         }
 
         private void btnCreateClick(object sender, EventArgs e)
         {
+            //inpute validation
             bool invalid = false;
             string name = tbxName.Text;
             if (string.IsNullOrEmpty(name))
@@ -47,11 +45,10 @@ namespace FlowTask_WinForms_Frontent
             string cat = cbxCategory.SelectedItem.ToString();
             DateTime date = dtDate.Value;
 
-            Task newTask = new Task(name, date, cat, Mediator.CurrentUser.UserID);
+            Task newTask = new Task(name.Trim(), date, cat, Mediator.CurrentUser.UserID);
 
+            //create the task in the database
             (bool result, string error, Task task_returned) = DatabaseController.dbController.WriteTask(newTask, Mediator.AuthCookie);
-
-
 
             if (result == false)
             {
@@ -59,14 +56,24 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
             else
+            {
                 MessageBox.Show(string.Format("Your task {0} has been created!", name), "Task creation succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(task_returned));
+                //add the task to the observable collection
+                ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(task_returned));
+
+                Hide();
+            }
         }
 
         private void tbxName_TextChanged(object sender, EventArgs e)
         {
             lblAssignmentName.ForeColor = Color.Black;
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            Hide();
         }
     }
 }

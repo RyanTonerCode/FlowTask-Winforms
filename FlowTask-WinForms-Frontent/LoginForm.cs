@@ -17,10 +17,10 @@ namespace FlowTask_WinForms_Frontent
         }
 
         /// <summary>
-        /// Update the username
+        /// Update the username and clears the default password
         /// </summary>
         /// <param name="username"></param>
-        public void UpdateUsername(string username) => tbxUsername.Text = username;
+        public void UpdateUsername(string username) { tbxUsername.Text = username; tbxPassword.Clear(); }
         
 
         /// <summary>

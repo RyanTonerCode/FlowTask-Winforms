@@ -36,6 +36,7 @@
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblAssignmentName = new System.Windows.Forms.Label();
             this.tbxName = new System.Windows.Forms.TextBox();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateTask.Location = new System.Drawing.Point(200, 283);
+            this.btnCreateTask.Location = new System.Drawing.Point(150, 286);
             this.btnCreateTask.Name = "btnCreateTask";
             this.btnCreateTask.Size = new System.Drawing.Size(173, 45);
             this.btnCreateTask.TabIndex = 0;
@@ -124,17 +125,32 @@
             this.tbxName.TabIndex = 0;
             this.tbxName.TextChanged += new System.EventHandler(this.tbxName_TextChanged);
             // 
-            // TaskCreate
+            // btnReturn
+            // 
+            this.btnReturn.BackColor = System.Drawing.Color.LightBlue;
+            this.btnReturn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturn.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturn.Location = new System.Drawing.Point(381, 286);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(173, 45);
+            this.btnReturn.TabIndex = 3;
+            this.btnReturn.Text = "Go Back";
+            this.btnReturn.UseVisualStyleBackColor = false;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // TaskCreationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(604, 343);
+            this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCreateTask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "TaskCreate";
+            this.Name = "TaskCreationForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Create A Task";
             this.groupBox1.ResumeLayout(false);
@@ -153,5 +169,6 @@
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblAssignmentName;
         private System.Windows.Forms.TextBox tbxName;
+        private System.Windows.Forms.Button btnReturn;
     }
 }

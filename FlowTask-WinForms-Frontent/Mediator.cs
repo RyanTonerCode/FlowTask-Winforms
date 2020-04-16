@@ -81,8 +81,6 @@ namespace FlowTask_WinForms_Frontent
         private static Form caller;
         private static Form subject;
 
-
-
         public static void ShowForm(Form Caller, Form Subject)
         {
             caller = Caller;
@@ -90,7 +88,10 @@ namespace FlowTask_WinForms_Frontent
 
             subject.Location = caller.Location;
 
-            subject.Disposed += (object o, EventArgs e) => caller.Show();
+            subject.Disposed += (object o, EventArgs e) => {
+                if (!caller.IsDisposed)
+                    caller.Show();
+            };
 
             caller.Hide();
             subject.Show();

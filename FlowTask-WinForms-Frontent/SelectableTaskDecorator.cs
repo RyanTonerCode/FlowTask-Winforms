@@ -5,12 +5,16 @@ using System.Drawing;
 
 namespace FlowTask_WinForms_Frontent
 {
+    /// <summary>
+    /// Decorator that allows tasks to be selected in the grid view and associated with a given color
+    /// </summary>
     public class SelectableTaskDecorator : Task
     {
-        public SelectableTaskDecorator(int taskID, string assignmentName, int graphID, DateTime submissionDate, string category, int userID) : base(taskID, assignmentName, graphID, submissionDate, category, userID)
-        {
-        }
 
+        /// <summary>
+        /// Construct a selectable task decorator for a given task
+        /// </summary>
+        /// <param name="t"></param>
         public SelectableTaskDecorator(Task t) : base(t.TaskID, t.AssignmentName, t.GraphID, t.SubmissionDate, t.Category, t.UserID)
         {
             AddGraph(t.Decomposition);
@@ -20,6 +24,9 @@ namespace FlowTask_WinForms_Frontent
 
         private Color c = Color.FromArgb(0, 0, 0);
 
+        /// <summary>
+        /// Retrieve a color for this Task
+        /// </summary>
         public Color DrawColor
         {
             get
@@ -32,23 +39,27 @@ namespace FlowTask_WinForms_Frontent
 
         static readonly List<string> UsedColors = new List<string>();
 
+        static readonly Random randy = new Random();
+
+        /// <summary>
+        /// Generate a random and unused task color
+        /// </summary>
+        /// <returns></returns>
         private Color RandColor()
         {
-            Random x = new Random();
             int r, g, b;
-            Color myRgbColor = new Color();
             while (true)
             {
-                r = x.Next(100, 200);
-                g = x.Next(100, 200);
-                b = x.Next(100, 200);
+                r = randy.Next(100, 200);
+                g = randy.Next(100, 200);
+                b = randy.Next(100, 200);
                 if (!UsedColors.Contains(r + "," + g + "," + b))
                 {
                     UsedColors.Add(r + "," + g + "," + b);
                     break;
                 }
             }
-            myRgbColor = Color.FromArgb(r, g, b);
+            Color myRgbColor = Color.FromArgb(r, g, b);
             return myRgbColor;
         }
     }
