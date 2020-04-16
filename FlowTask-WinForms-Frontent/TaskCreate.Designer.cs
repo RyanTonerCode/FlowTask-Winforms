@@ -79,7 +79,7 @@
             this.cbxCategory.FormattingEnabled = true;
             this.cbxCategory.Items.AddRange(new object[] {
             "Research Paper",
-            "Software Project"});
+            "Agile Software Project"});
             this.cbxCategory.Location = new System.Drawing.Point(198, 119);
             this.cbxCategory.Name = "cbxCategory";
             this.cbxCategory.Size = new System.Drawing.Size(228, 24);

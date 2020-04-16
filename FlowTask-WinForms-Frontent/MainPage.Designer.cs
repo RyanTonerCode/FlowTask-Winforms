@@ -43,11 +43,11 @@
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.ForeColor = System.Drawing.Color.Crimson;
             this.lblWelcome.Location = new System.Drawing.Point(26, 27);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(221, 22);
+            this.lblWelcome.Size = new System.Drawing.Size(277, 29);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Welcome to FlowTask, ";
             // 
@@ -56,7 +56,7 @@
             this.lblTasks.AutoSize = true;
             this.lblTasks.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTasks.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblTasks.Location = new System.Drawing.Point(59, 71);
+            this.lblTasks.Location = new System.Drawing.Point(79, 72);
             this.lblTasks.Name = "lblTasks";
             this.lblTasks.Size = new System.Drawing.Size(224, 22);
             this.lblTasks.TabIndex = 3;
@@ -68,7 +68,7 @@
             this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnView.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnView.Location = new System.Drawing.Point(30, 632);
+            this.btnView.Location = new System.Drawing.Point(30, 645);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(124, 45);
             this.btnView.TabIndex = 4;
@@ -82,7 +82,7 @@
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(233, 632);
+            this.btnDelete.Location = new System.Drawing.Point(272, 645);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(124, 45);
             this.btnDelete.TabIndex = 5;
@@ -94,6 +94,7 @@
             // 
             this.sfCalendarOverview.Culture = new System.Globalization.CultureInfo("en-US");
             this.sfCalendarOverview.Location = new System.Drawing.Point(732, -2);
+            this.sfCalendarOverview.Margin = new System.Windows.Forms.Padding(0);
             this.sfCalendarOverview.Name = "sfCalendarOverview";
             this.sfCalendarOverview.Size = new System.Drawing.Size(504, 510);
             this.sfCalendarOverview.TabIndex = 6;
@@ -109,10 +110,12 @@
             this.sfDataGrid.AutoGenerateColumns = false;
             this.sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             this.sfDataGrid.BackColor = System.Drawing.SystemColors.Window;
-            this.sfDataGrid.Location = new System.Drawing.Point(21, 120);
+            this.sfDataGrid.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sfDataGrid.Location = new System.Drawing.Point(1, 109);
+            this.sfDataGrid.Margin = new System.Windows.Forms.Padding(0);
             this.sfDataGrid.Name = "sfDataGrid";
             this.sfDataGrid.RowHeight = 21;
-            this.sfDataGrid.Size = new System.Drawing.Size(677, 445);
+            this.sfDataGrid.Size = new System.Drawing.Size(731, 493);
             this.sfDataGrid.TabIndex = 1;
             this.sfDataGrid.Text = "sfDataGrid1";
             // 
@@ -122,7 +125,7 @@
             this.btnCreateTask.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreateTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTask.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateTask.Location = new System.Drawing.Point(422, 632);
+            this.btnCreateTask.Location = new System.Drawing.Point(531, 645);
             this.btnCreateTask.Name = "btnCreateTask";
             this.btnCreateTask.Size = new System.Drawing.Size(124, 45);
             this.btnCreateTask.TabIndex = 7;
@@ -136,7 +139,7 @@
             this.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(574, 16);
+            this.btnLogout.Location = new System.Drawing.Point(593, 27);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(124, 45);
             this.btnLogout.TabIndex = 8;
@@ -146,10 +149,10 @@
             // 
             // flowLayout
             // 
-            this.flowLayout.Location = new System.Drawing.Point(732, 506);
+            this.flowLayout.Location = new System.Drawing.Point(732, 508);
             this.flowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(504, 242);
+            this.flowLayout.Size = new System.Drawing.Size(504, 240);
             this.flowLayout.TabIndex = 9;
             // 
             // MainPage

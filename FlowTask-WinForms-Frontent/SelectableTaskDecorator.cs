@@ -13,7 +13,7 @@ namespace FlowTask_WinForms_Frontent
 
         public SelectableTaskDecorator(Task t) : base(t.TaskID, t.AssignmentName, t.GraphID, t.SubmissionDate, t.Category, t.UserID)
         {
-
+            AddGraph(t.Decomposition);
         }
 
         public bool Selected { get; set; }

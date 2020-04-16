@@ -41,7 +41,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.BackColor = System.Drawing.Color.LightBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblUsername);
             this.panel1.Controls.Add(this.btnRegistration);
@@ -50,84 +50,89 @@
             this.panel1.Controls.Add(this.tbxUsername);
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(33, 94);
+            this.panel1.Location = new System.Drawing.Point(12, 85);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(337, 251);
+            this.panel1.Size = new System.Drawing.Size(512, 223);
             this.panel1.TabIndex = 0;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsername.Location = new System.Drawing.Point(27, 31);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(67, 16);
+            this.lblUsername.Size = new System.Drawing.Size(97, 22);
             this.lblUsername.TabIndex = 8;
             this.lblUsername.Text = "Username";
             // 
             // btnRegistration
             // 
-            this.btnRegistration.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistration.Location = new System.Drawing.Point(184, 164);
+            this.btnRegistration.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnRegistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistration.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistration.Location = new System.Drawing.Point(373, 164);
             this.btnRegistration.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRegistration.Name = "btnRegistration";
             this.btnRegistration.Size = new System.Drawing.Size(120, 33);
             this.btnRegistration.TabIndex = 7;
             this.btnRegistration.Text = "Register";
-            this.btnRegistration.UseVisualStyleBackColor = true;
+            this.btnRegistration.UseVisualStyleBackColor = false;
             this.btnRegistration.Click += new System.EventHandler(this.btnRegistration_Click);
             // 
             // tbxPassword
             // 
-            this.tbxPassword.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPassword.Location = new System.Drawing.Point(102, 76);
+            this.tbxPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPassword.Location = new System.Drawing.Point(141, 80);
             this.tbxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbxPassword.MaxLength = 30;
             this.tbxPassword.Name = "tbxPassword";
-            this.tbxPassword.Size = new System.Drawing.Size(202, 22);
+            this.tbxPassword.Size = new System.Drawing.Size(352, 29);
             this.tbxPassword.TabIndex = 6;
             this.tbxPassword.UseSystemPasswordChar = true;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.Location = new System.Drawing.Point(27, 80);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(65, 16);
+            this.lblPassword.Size = new System.Drawing.Size(94, 22);
             this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "Password";
             // 
             // tbxUsername
             // 
-            this.tbxUsername.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxUsername.Location = new System.Drawing.Point(102, 28);
+            this.tbxUsername.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxUsername.Location = new System.Drawing.Point(141, 28);
             this.tbxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
-            this.tbxUsername.Size = new System.Drawing.Size(202, 22);
+            this.tbxUsername.Size = new System.Drawing.Size(352, 29);
             this.tbxUsername.TabIndex = 4;
             // 
             // btnLogin
             // 
-            this.btnLogin.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(30, 164);
+            this.btnLogin.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(141, 164);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(120, 33);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 29);
+            this.label1.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label1.Location = new System.Drawing.Point(38, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 22);
+            this.label1.Size = new System.Drawing.Size(280, 32);
             this.label1.TabIndex = 1;
             this.label1.Text = "FlowTask Login Portal";
             // 
@@ -135,8 +140,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(409, 388);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(553, 339);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

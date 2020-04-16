@@ -55,10 +55,10 @@ namespace FlowTask_WinForms_Frontent
             taskCreate.Show();
         }
 
-        public static void ShowViewTask()
+        public static void ShowViewTask(Task t)
         {
             if (viewTask == null || viewTask.IsDisposed)
-                viewTask = new ViewTask();
+                viewTask = new ViewTask(t);
             viewTask.Show();
         }
 
