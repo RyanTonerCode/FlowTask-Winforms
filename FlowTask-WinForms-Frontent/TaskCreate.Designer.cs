@@ -132,7 +132,10 @@
             this.ClientSize = new System.Drawing.Size(604, 343);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCreateTask);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "TaskCreate";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Create A Task";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -11,6 +11,7 @@ namespace FlowTask_WinForms_Frontent
         public RegistrationForm()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
 
             tbxPassword.TextChanged += tbxTextChanged;
             tbxConfirmPassword.TextChanged += tbxTextChanged;

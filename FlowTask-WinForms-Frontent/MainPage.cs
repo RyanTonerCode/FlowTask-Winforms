@@ -18,6 +18,7 @@ namespace FlowTask_WinForms_Frontent
         {
             InitializeComponent();
 
+            StartPosition = FormStartPosition.CenterScreen;
             DoubleBuffered = true;
 
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
@@ -26,17 +27,14 @@ namespace FlowTask_WinForms_Frontent
             sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
 
             sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(14, 14) });
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name" });
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)" });
+            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name", MinimumWidth = 200 });
+            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)", MinimumWidth = 200 });
             sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Flow Steps", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
+            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Nodes", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
 
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
-
             sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
-
             sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
-
             sfDataGrid.RowHeight = 40;
 
             Disposed += MainPage_Disposed;
@@ -89,6 +87,9 @@ namespace FlowTask_WinForms_Frontent
                         Width = flowLayout.Width,
                         BorderStyle = BorderStyle.FixedSingle
                     };
+
+                    info.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
+
                     flowLayout.Controls.Add(info);
                 }
         }
@@ -105,9 +106,9 @@ namespace FlowTask_WinForms_Frontent
             if (index == -1)
                 return;
 
-            e.Style.TextMargins = new Padding(4, 4, 4, 4);
+            e.Style.TextMargins = new Padding(3, 3, 3, 3);
 
-            e.Style.Font = new Syncfusion.WinForms.DataGrid.Styles.GridFontInfo(new Font("Segoe UI", 14, FontStyle.Regular, GraphicsUnit.Point));
+            e.Style.Font = new Syncfusion.WinForms.DataGrid.Styles.GridFontInfo(new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Point));
 
             var color = ObservableCollections.ObservableTaskCollection[index].DrawColor;
             if (e.Column.MappingName != "Selected")
@@ -120,14 +121,10 @@ namespace FlowTask_WinForms_Frontent
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            List<SelectableTaskDecorator> to_draw = new List<SelectableTaskDecorator>();
 
             if (args.IsTrailingDate)
-            {
-                // Customize the cell appearance using options from DrawCellEventArgs
                 args.ForeColor = Color.DarkGray;
-            }
-
-            List<SelectableTaskDecorator> to_draw = new List<SelectableTaskDecorator>();
 
             DateTime here = args.Value.Value;
 
@@ -141,7 +138,9 @@ namespace FlowTask_WinForms_Frontent
             {
                 args.Handled = true;
 
-                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, Color.Black, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+                Color c = args.IsTrailingDate ? Color.DarkGray : Color.Black;
+
+                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, c, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
                 args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
                 startPosition -= 18;

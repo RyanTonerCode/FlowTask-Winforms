@@ -250,8 +250,11 @@
             this.Controls.Add(this.pnlRegister);
             this.Controls.Add(this.btnCreate);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "RegistrationForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "RegistrationForm";
             this.pnlRegister.ResumeLayout(false);
             this.pnlRegister.PerformLayout();

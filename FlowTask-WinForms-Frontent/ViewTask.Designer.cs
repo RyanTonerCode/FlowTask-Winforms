@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Syncfusion.Windows.Forms.Diagram.Binding binding1 = new Syncfusion.Windows.Forms.Diagram.Binding();
+            Syncfusion.Windows.Forms.Diagram.Binding binding2 = new Syncfusion.Windows.Forms.Diagram.Binding();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewTask));
             this.diagram1 = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
             this.model1 = new Syncfusion.Windows.Forms.Diagram.Model(this.components);
@@ -42,13 +42,13 @@
             // diagram1
             // 
             this.diagram1.BackColor = System.Drawing.Color.White;
-            binding1.DefaultConnector = null;
-            binding1.DefaultNode = null;
-            binding1.Diagram = this.diagram1;
-            binding1.Id = null;
-            binding1.Label = ((System.Collections.Generic.List<string>)(resources.GetObject("binding1.Label")));
-            binding1.ParentId = null;
-            this.diagram1.Binding = binding1;
+            binding2.DefaultConnector = null;
+            binding2.DefaultNode = null;
+            binding2.Diagram = this.diagram1;
+            binding2.Id = null;
+            binding2.Label = ((System.Collections.Generic.List<string>)(resources.GetObject("binding2.Label")));
+            binding2.ParentId = null;
+            this.diagram1.Binding = binding2;
             this.diagram1.Controller.Constraint = Syncfusion.Windows.Forms.Diagram.Constraints.PageEditable;
             this.diagram1.Controller.DefaultConnectorTool = Syncfusion.Windows.Forms.Diagram.ConnectorTool.OrgLineConnectorTool;
             this.diagram1.Controller.PasteOffset = new System.Drawing.SizeF(10F, 10F);
@@ -100,7 +100,7 @@
             this.sfCalendarOverview.Location = new System.Drawing.Point(0, 440);
             this.sfCalendarOverview.Margin = new System.Windows.Forms.Padding(0);
             this.sfCalendarOverview.Name = "sfCalendarOverview";
-            this.sfCalendarOverview.NumberOfWeeksInView = 2;
+            this.sfCalendarOverview.NumberOfWeeksInView = 4;
             this.sfCalendarOverview.Size = new System.Drawing.Size(770, 308);
             this.sfCalendarOverview.TabIndex = 7;
             this.sfCalendarOverview.Text = "sfCalendar1";
@@ -121,7 +121,11 @@
             this.Controls.Add(this.flowLayout);
             this.Controls.Add(this.diagram1);
             this.Controls.Add(this.sfCalendarOverview);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ViewTask";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ViewTask";
             ((System.ComponentModel.ISupportInitialize)(this.diagram1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.model1)).EndInit();

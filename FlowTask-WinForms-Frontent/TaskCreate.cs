@@ -10,6 +10,8 @@ namespace FlowTask_WinForms_Frontent
         public TaskCreate()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+
             dtDate.Value = DateTime.Now.AddDays(14);
             cbxCategory.SelectedIndex = 0;
         }

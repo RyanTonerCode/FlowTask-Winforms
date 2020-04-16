@@ -14,17 +14,19 @@ namespace FlowTask_WinForms_Frontent
     public partial class ViewTask : Form
     {
         readonly Task myTask;
-
-        ObservableCollection<NodeDecorator> nodes = ObservableCollections.ObservableNodeCollection;
+        readonly ObservableCollection<NodeDecorator> nodes = ObservableCollections.ObservableNodeCollection;
 
         public ViewTask(Task toShow)
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
 
             myTask = toShow;
             Text = string.Format("View Task {0}", myTask.AssignmentName);
             foreach (var n in myTask.Decomposition.Nodes)
                 nodes.Add(new NodeDecorator(n));
+
+            
 
             diagram1.BeginUpdate();
             DiagramAppearance();
@@ -44,8 +46,12 @@ namespace FlowTask_WinForms_Frontent
 
             DoubleBuffered = true;
 
+            DateTime firstDate = myTask.Decomposition.GetSoonestDate();
+
             sfCalendarOverview.DrawCell += SfCalendarDrawCell;
             sfCalendarOverview.SelectionChanged += SfCalendarOverview_SelectionChanged;
+            sfCalendarOverview.SelectedDate = firstDate;
+            sfCalendarOverview.GoToDate(firstDate);
         }
 
         #region Diagram
@@ -190,21 +196,17 @@ namespace FlowTask_WinForms_Frontent
         private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
             drawDue(sender.SelectedDate.Value);
-            
+            sfCalendarOverview.GoToDate(sender.SelectedDate.Value);
         }
 
         void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
+            
+            List<NodeDecorator> to_draw = new List<NodeDecorator>();
 
             if (args.IsTrailingDate)
-            {
-                // Customize the cell appearance using options from DrawCellEventArgs
                 args.ForeColor = Color.DarkGray;
-            }
-
-            List<NodeDecorator> to_draw = new List<NodeDecorator>();
 
             DateTime here = args.Value.Value;
 
@@ -218,7 +220,9 @@ namespace FlowTask_WinForms_Frontent
             {
                 args.Handled = true;
 
-                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, System.Drawing.FontStyle.Regular), args.CellBounds, Color.Black, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+                Color c = args.IsTrailingDate ? Color.DarkGray : Color.Black;
+
+                TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, System.Drawing.FontStyle.Regular), args.CellBounds, c, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
                 args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new System.Drawing.Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
                 startPosition -= 18;

@@ -170,7 +170,10 @@
             this.Controls.Add(this.lblTasks);
             this.Controls.Add(this.lblWelcome);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainPage";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "FlowTask";
             this.Load += new System.EventHandler(this.MainPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).EndInit();
