@@ -1,6 +1,6 @@
 ﻿namespace FlowTask_WinForms_Frontent
 {
-    partial class ViewTask
+    partial class ViewTaskForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             Syncfusion.Windows.Forms.Diagram.Binding binding2 = new Syncfusion.Windows.Forms.Diagram.Binding();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewTask));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewTaskForm));
             this.sfTreeDiagram = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
             this.treeModel = new Syncfusion.Windows.Forms.Diagram.Model(this.components);
             this.sfNodeCalendar = new Syncfusion.WinForms.Input.SfCalendar();

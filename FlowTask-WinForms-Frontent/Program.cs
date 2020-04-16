@@ -18,15 +18,12 @@ namespace FlowTask_WinForms_Frontent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoginForm entry = new LoginForm();
+            LoginForm entry_loginForm = new LoginForm();
+            Mediator.LoginForm = entry_loginForm;
+            Mediator.RegistrationForm = new RegistrationForm();
+            Mediator.MainForm = new MainForm();
 
-            entry.Location = new System.Drawing.Point(100, 100);
-
-            Mediator.login = entry;
-            Mediator.register = new RegistrationForm();
-            Mediator.main = new MainPage();
-
-            Application.Run(entry);
+            Application.Run(entry_loginForm);
         }
 
         /// <summary>

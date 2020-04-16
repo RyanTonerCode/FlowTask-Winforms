@@ -6,26 +6,32 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
-    public partial class ViewTask : Form
+    public partial class ViewTaskForm : Form
     {
-        Task myTask;
+        private Task myTask;
+
         readonly ObservableCollection<NodeDecorator> nodes = ObservableCollections.ObservableNodeCollection;
 
-        public ViewTask(Task toShow)
+        public ViewTaskForm(Task toShow)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             DoubleBuffered = true;
 
             myTask = toShow;
-            Text = string.Format("View Task {0}", myTask.AssignmentName);
-            foreach (var n in myTask.Decomposition.Nodes)
-                nodes.Add(new NodeDecorator(n));
+            DateTime firstDate = DateTime.Now;
+            if (myTask != null)
+            {
+                Text = string.Format("View Task {0}", myTask.AssignmentName);
+                foreach (var n in myTask.Decomposition.Nodes)
+                    nodes.Add(new NodeDecorator(n));
+
+                firstDate = myTask.Decomposition.GetSoonestDate();
+            }
 
             sfTreeDiagram.BeginUpdate();
             DiagramAppearance();
@@ -46,8 +52,6 @@ namespace FlowTask_WinForms_Frontent
             sfTreeDiagram.View.SelectionList.Clear();
 
             sfTreeDiagram.EndUpdate();
-
-            DateTime firstDate = myTask.Decomposition.GetSoonestDate();
 
             sfNodeCalendar.DrawCell += SfCalendarDrawCell;
             sfNodeCalendar.SelectionChanged += SfCalendarOverview_SelectionChanged;
@@ -237,16 +241,16 @@ namespace FlowTask_WinForms_Frontent
 
                     chbx.CheckedChanged += (object sender, EventArgs e) => {
                         var result = chbx.Checked;
-                        var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.ac, myTask.UserID, node.NodeID, result);
+                        var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
                         if (Success)
                         {
-                            node.SetComplete(result);
+                            node.SetCompleteStatus(result);
                             //update the task node to reflect the change.
-                            myTask.Decomposition.Nodes[node.NodeIndex].SetComplete(result);
+                            myTask.Decomposition.Nodes[node.NodeIndex].SetCompleteStatus(result);
                             int x = myTask.RemainingFlowSteps;
 
                             drawDue(here);
-                            Mediator.main.Redraw();
+                            Mediator.MainForm.Redraw();
                         }
                         else
                         {

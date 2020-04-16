@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
-    public partial class TaskCreate : Form
+    public partial class TaskCreationForm : Form
     {
-        public TaskCreate(DateTime? initial)
+        public TaskCreationForm(DateTime? initial)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
@@ -47,9 +47,9 @@ namespace FlowTask_WinForms_Frontent
             string cat = cbxCategory.SelectedItem.ToString();
             DateTime date = dtDate.Value;
 
-            Task newTask = new Task(name, date, cat, Mediator.Me.UserId);
+            Task newTask = new Task(name, date, cat, Mediator.CurrentUser.UserID);
 
-            (bool result, string error, Task task_returned) = DatabaseController.dbController.WriteTask(newTask, Mediator.ac);
+            (bool result, string error, Task task_returned) = DatabaseController.dbController.WriteTask(newTask, Mediator.AuthCookie);
 
 
 

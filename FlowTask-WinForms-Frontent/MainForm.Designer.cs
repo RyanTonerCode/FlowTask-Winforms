@@ -1,6 +1,6 @@
 ﻿namespace FlowTask_WinForms_Frontent
 {
-    partial class MainPage
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.

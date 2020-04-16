@@ -65,13 +65,13 @@ namespace FlowTask_WinForms_Frontent
 
             User u = new User(username, firstName, lastName, email, pass);
 
-            (bool b, string s) = DatabaseController.dbController.WriteUser(u);
-            if (!b)
+            (bool Succeeded, string ErrorMessage) = DatabaseController.dbController.WriteUser(u);
+            if (!Succeeded)
             {
-                MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show(string.Format("Hi {0}, your FlowTask account has been created!", username), s, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(string.Format("Hi {0}, your FlowTask account has been created!", username), ErrorMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Mediator.ShowCaller();
         }
 

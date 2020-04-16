@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
-    public partial class MainPage : Form
+    public partial class MainForm : Form
     {
 
-        public MainPage()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -154,11 +154,11 @@ namespace FlowTask_WinForms_Frontent
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            lblWelcome.Text = "Welcome to FlowTask " + Mediator.Me.Username + "!";
+            lblWelcome.Text = "Welcome to FlowTask " + Mediator.CurrentUser.Username + "!";
 
             ObservableCollections.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
 
-            foreach (Task t in Mediator.Me.Tasks)
+            foreach (Task t in Mediator.CurrentUser.Tasks)
                 ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
 
             drawDue(DateTime.Today);
@@ -176,7 +176,7 @@ namespace FlowTask_WinForms_Frontent
 
         private void btnCreateTask_Click(object sender, EventArgs e)
         {
-            Mediator.ShowTaskCreate(sfTaskCalendar.SelectedDate);
+            Mediator.ShowTaskCreation(sfTaskCalendar.SelectedDate);
         }
 
         private void btnDeleteClick(object sender, EventArgs e)
@@ -199,7 +199,7 @@ namespace FlowTask_WinForms_Frontent
                     if (dr == DialogResult.Yes)
                     {
                         //TaskCollection.ObservableTaskCollection.Remove(task);
-                        DatabaseController.dbController.DeleteTask(task, Mediator.ac);
+                        DatabaseController.dbController.DeleteTask(task, Mediator.AuthCookie);
 
                         to_remove.Add(task);
                     }

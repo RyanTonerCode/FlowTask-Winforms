@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
-    public partial class ViewTask
+    public partial class ViewTaskForm
     {
         public class SizableCheckBox : CheckBox
         {

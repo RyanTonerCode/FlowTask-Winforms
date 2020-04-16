@@ -1,6 +1,6 @@
 ﻿namespace FlowTask_WinForms_Frontent
 {
-    partial class TaskCreate
+    partial class TaskCreationForm
     {
         /// <summary>
         /// Required designer variable.

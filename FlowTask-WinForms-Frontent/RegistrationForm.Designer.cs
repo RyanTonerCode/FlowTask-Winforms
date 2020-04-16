@@ -204,7 +204,7 @@
             this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreate.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreate.Location = new System.Drawing.Point(117, 426);
+            this.btnCreate.Location = new System.Drawing.Point(82, 426);
             this.btnCreate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(164, 43);
@@ -216,10 +216,11 @@
             // btnEscape
             // 
             this.btnEscape.BackColor = System.Drawing.Color.LightBlue;
+            this.btnEscape.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnEscape.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEscape.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEscape.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEscape.Location = new System.Drawing.Point(416, 426);
+            this.btnEscape.Location = new System.Drawing.Point(360, 426);
             this.btnEscape.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEscape.Name = "btnEscape";
             this.btnEscape.Size = new System.Drawing.Size(164, 43);
@@ -241,9 +242,11 @@
             // 
             // RegistrationForm
             // 
+            this.AcceptButton = this.btnCreate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.CancelButton = this.btnEscape;
             this.ClientSize = new System.Drawing.Size(609, 495);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEscape);
@@ -255,7 +258,7 @@
             this.MaximizeBox = false;
             this.Name = "RegistrationForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "RegistrationForm";
+            this.Text = "Register for FlowTask!";
             this.pnlRegister.ResumeLayout(false);
             this.pnlRegister.PerformLayout();
             this.ResumeLayout(false);

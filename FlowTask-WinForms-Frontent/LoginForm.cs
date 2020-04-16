@@ -16,8 +16,7 @@ namespace FlowTask_WinForms_Frontent
             tbxPassword.Text = "password";
         }
 
-        private void btnRegistration_Click(object sender, EventArgs e) =>
-            Mediator.ShowForm(this, Mediator.register);
+        private void btnRegistration_Click(object sender, EventArgs e) => Mediator.ShowForm(this, Mediator.RegistrationForm);
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -36,10 +35,10 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
 
-            var user = DatabaseController.dbController.GetUser(username, password);
+            (User user, AuthorizationCookie? ac) = DatabaseController.dbController.GetUser(username, password);
 
 
-            if (user.user == null)
+            if (user == null || !ac.HasValue)
             {
                 MessageBox.Show("Please check your credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblPassword.ForeColor = System.Drawing.Color.Red;
@@ -47,10 +46,11 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
 
-            Mediator.Me = user.user;
-            Mediator.ac = user.ac;
+            Mediator.CurrentUser = user;
 
-            Mediator.ShowForm(this, Mediator.main);
+            Mediator.AuthCookie = ac.Value;
+
+            Mediator.ShowForm(this, Mediator.MainForm);
         }
 
     }

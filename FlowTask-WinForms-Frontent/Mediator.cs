@@ -5,62 +5,126 @@ using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
+    /// <summary>
+    /// A mediator between all the forms in the application
+    /// </summary>
     public static class Mediator
     {
+        /// <summary>
+        /// Close the application
+        /// </summary>
         public static void Logout()
         {
             Application.Exit();
         }
 
-        public static User Me;
+        /// <summary>
+        /// The currently logged-in user
+        /// </summary>
+        public static User CurrentUser;
 
-        public static LoginForm login;
-        public static RegistrationForm register;
-        public static MainPage main;
-        public static TaskCreate taskCreate;
-        public static ViewTask viewTask;
+        /// <summary>
+        /// The authorization cookie associated with the user
+        /// </summary>
+        public static AuthorizationCookie AuthCookie;
 
-        public static AuthorizationCookie ac;
+        //private fields for all forms
+        private static LoginForm loginForm;
+        private static RegistrationForm registrationForm;
+        private static MainForm mainForm;
+        private static TaskCreationForm taskCreationForm;
+        private static ViewTaskForm viewTaskForm;
 
-        private static Form Caller;
-
-        private static List<Form> subjects;
-
-        public static void ShowForm(Form caller, Form subject)
+        //properties to ensure the forms are alwyas available in blank template when needed
+        public static LoginForm LoginForm { 
+            get {
+                return loginForm == null || loginForm.IsDisposed ? new LoginForm() : loginForm;
+            }
+            set => loginForm = value; 
+        }
+        public static RegistrationForm RegistrationForm
         {
-            if (subjects == null)
-                subjects = new List<Form>();
+            get
+            {
+                return registrationForm == null || registrationForm.IsDisposed ? new RegistrationForm() : registrationForm;
+            }
+            set => registrationForm = value;
+        }
+        public static MainForm MainForm
+        {
+            get
+            {
+                return mainForm == null || mainForm.IsDisposed ? new MainForm() : mainForm;
+            }
+            set => mainForm = value;
+        }
+        public static TaskCreationForm TaskCreationForm
+        {
+            get
+            {
+                return taskCreationForm == null || taskCreationForm.IsDisposed ? new TaskCreationForm(null) : taskCreationForm;
+            }
+            set => taskCreationForm = value;
+        }
+        public static ViewTaskForm ViewTaskForm
+        {
+            get
+            {
+                return viewTaskForm == null || viewTaskForm.IsDisposed ? new ViewTaskForm(null) : viewTaskForm;
+            }
+            set => viewTaskForm = value;
+        }
 
-            Caller = caller;
+        /// <summary>
+        /// The form that asked to display the subject
+        /// </summary>
+        private static Form caller;
+        private static Form subject;
+
+
+
+        public static void ShowForm(Form Caller, Form Subject)
+        {
+            caller = Caller;
+            subject = Subject;
 
             subject.Location = caller.Location;
 
+            subject.Disposed += (object o, EventArgs e) => caller.Show();
+
             caller.Hide();
             subject.Show();
-
-            subjects.Add(subject);
         }
 
+        /// <summary>
+        /// Shows the caller and hides the subject
+        /// </summary>
         public static void ShowCaller()
         {
-            Caller.Show();
-
-            foreach (var x in subjects)
-                x.Hide();
+            subject.Hide();
+            caller.Show();
         }
 
-        public static void ShowTaskCreate(DateTime? initial)
+        /// <summary>
+        /// Shows the task creation form with the given time
+        /// </summary>
+        /// <param name="defaultTime"></param>
+        public static void ShowTaskCreation(DateTime? defaultTime)
         {
-            if (taskCreate == null || taskCreate.IsDisposed)
-                taskCreate = new TaskCreate(initial);
-            taskCreate.Show();
+            if (taskCreationForm == null || taskCreationForm.IsDisposed)
+                taskCreationForm = new TaskCreationForm(defaultTime);
+            taskCreationForm.Show();
         }
 
-        public static void ShowViewTask(Task t)
+        /// <summary>
+        /// Shows the view task form with the given task
+        /// </summary>
+        /// <param name="defaultTask"></param>
+        public static void ShowViewTask(Task defaultTask)
         {
-            if (viewTask == null || viewTask.IsDisposed)
-                viewTask = new ViewTask(t);
-            viewTask.Show();
+            if (viewTaskForm == null || viewTaskForm.IsDisposed)
+                viewTaskForm = new ViewTaskForm(defaultTask);
+            viewTaskForm.Show();
         }
 
     }
