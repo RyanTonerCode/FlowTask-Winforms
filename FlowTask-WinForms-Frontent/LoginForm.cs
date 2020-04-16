@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FlowTask_Backend;
+using System;
 using System.Windows.Forms;
-using FlowTask_Backend;
 
 namespace FlowTask_WinForms_Frontent
 {
@@ -16,7 +16,7 @@ namespace FlowTask_WinForms_Frontent
             tbxPassword.Text = "password";
         }
 
-        private void btnRegistration_Click(object sender, EventArgs e) => 
+        private void btnRegistration_Click(object sender, EventArgs e) =>
             Mediator.ShowForm(this, Mediator.register);
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace FlowTask_WinForms_Frontent
 
             var user = DatabaseController.dbController.GetUser(username, password);
 
-            
+
             if (user.user == null)
             {
                 MessageBox.Show("Please check your credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

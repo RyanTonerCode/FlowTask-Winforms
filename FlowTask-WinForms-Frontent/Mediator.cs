@@ -28,7 +28,7 @@ namespace FlowTask_WinForms_Frontent
 
         public static void ShowForm(Form caller, Form subject)
         {
-            if(subjects == null)
+            if (subjects == null)
                 subjects = new List<Form>();
 
             Caller = caller;

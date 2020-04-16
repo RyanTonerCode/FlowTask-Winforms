@@ -1,13 +1,13 @@
-﻿using System;
+﻿using FlowTask_Backend;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.Input;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using FlowTask_Backend;
-using Syncfusion.WinForms.DataGrid;
-using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.WinForms.Input;
 
 namespace FlowTask_WinForms_Frontent
 {
@@ -26,7 +26,9 @@ namespace FlowTask_WinForms_Frontent
 
             sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
 
-            sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(14, 14) });
+            sfDataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowChildViewUpdate;
+
+            sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(18, 18) });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name", MinimumWidth = 200 });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)", MinimumWidth = 200 });
             sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
@@ -39,6 +41,8 @@ namespace FlowTask_WinForms_Frontent
 
             Disposed += MainPage_Disposed;
         }
+
+        public void Redraw() { sfDataGrid.Refresh(); }
 
         private void MainPage_Disposed(object sender, EventArgs e)
         {
@@ -154,7 +158,7 @@ namespace FlowTask_WinForms_Frontent
 
             ObservableCollections.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
 
-            foreach(Task t in Mediator.Me.Tasks)
+            foreach (Task t in Mediator.Me.Tasks)
                 ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
 
             drawDue(DateTime.Today);
@@ -162,7 +166,7 @@ namespace FlowTask_WinForms_Frontent
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if(ObservableCollections.ObservableTaskCollection.Count == 0)
+            if (ObservableCollections.ObservableTaskCollection.Count == 0)
                 lblTasks.Text = "Congrats, you have no tasks left!";
             else
                 lblTasks.Text = string.Format("You have {0} task{1}!", ObservableCollections.ObservableTaskCollection.Count, (ObservableCollections.ObservableTaskCollection.Count == 1 ? "" : "s"));
@@ -178,13 +182,14 @@ namespace FlowTask_WinForms_Frontent
         private void btnDeleteClick(object sender, EventArgs e)
         {
             var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);
-            if (Selected.Count() == 0) {
+            if (Selected.Count() == 0)
+            {
                 MessageBox.Show("Please select a task first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var to_remove = new List<SelectableTaskDecorator>();
 
-            foreach(SelectableTaskDecorator task in Selected)
+            foreach (SelectableTaskDecorator task in Selected)
             {
                 if (task.Selected)
                 {
@@ -201,7 +206,7 @@ namespace FlowTask_WinForms_Frontent
                 }
             }
 
-            foreach(var task in to_remove)
+            foreach (var task in to_remove)
                 ObservableCollections.ObservableTaskCollection.Remove(task);
 
             to_remove.Clear();
@@ -215,7 +220,7 @@ namespace FlowTask_WinForms_Frontent
         private void btnView_Click(object sender, EventArgs e)
         {
             var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);
-            if(Selected.Count() == 0)
+            if (Selected.Count() == 0)
             {
                 MessageBox.Show("Please select a task first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

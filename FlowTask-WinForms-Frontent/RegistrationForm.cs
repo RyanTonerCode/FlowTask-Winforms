@@ -37,7 +37,7 @@ namespace FlowTask_WinForms_Frontent
                     if (string.IsNullOrEmpty(c.Text))
                     {
                         Label l = getAssociatedLabel(c.Name);
-                        if(l != null)
+                        if (l != null)
                         {
                             l.ForeColor = Color.Red;
                             valid = false;
@@ -59,13 +59,13 @@ namespace FlowTask_WinForms_Frontent
             string lastName = tbxLastName.Text;
 
             if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(confirm) && !pass.Equals(confirm))
-                    return;
+                return;
 
             //if account create works, then show login
 
             User u = new User(username, firstName, lastName, email, pass);
 
-           (bool b, string s) = DatabaseController.dbController.WriteUser(u);
+            (bool b, string s) = DatabaseController.dbController.WriteUser(u);
             if (!b)
             {
                 MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -90,7 +90,7 @@ namespace FlowTask_WinForms_Frontent
             string pass = tbxPassword.Text;
             string confirm = tbxConfirmPassword.Text;
 
-            if(!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(confirm))
+            if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(confirm))
             {
                 if (!pass.Equals(confirm))
                     tbxConfirmPassword.BackColor = Color.Red;

@@ -7,7 +7,10 @@ namespace FlowTask_WinForms_Frontent
         private static ObservableCollection<SelectableTaskDecorator> task_singleton;
 
 
-        public static ObservableCollection<SelectableTaskDecorator> ObservableTaskCollection { get {
+        public static ObservableCollection<SelectableTaskDecorator> ObservableTaskCollection
+        {
+            get
+            {
                 return task_singleton ?? (task_singleton = new ObservableCollection<SelectableTaskDecorator>());
             }
         }

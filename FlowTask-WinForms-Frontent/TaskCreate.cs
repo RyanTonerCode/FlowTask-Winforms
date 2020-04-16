@@ -1,7 +1,7 @@
-﻿using System;
-using FlowTask_Backend;
-using System.Windows.Forms;
+﻿using FlowTask_Backend;
+using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
@@ -30,12 +30,12 @@ namespace FlowTask_WinForms_Frontent
                 lblAssignmentName.ForeColor = Color.Red;
                 invalid = true;
             }
-            if(cbxCategory.SelectedIndex == -1)
+            if (cbxCategory.SelectedIndex == -1)
             {
                 lblCategory.ForeColor = Color.Red;
                 invalid = true;
             }
-            if(dtDate.Value == null)
+            if (dtDate.Value == null)
             {
                 lblDueDate.ForeColor = Color.Red;
                 invalid = true;
@@ -51,7 +51,7 @@ namespace FlowTask_WinForms_Frontent
 
             (bool result, string error, Task task_returned) = DatabaseController.dbController.WriteTask(newTask, Mediator.ac);
 
-            
+
 
             if (result == false)
             {

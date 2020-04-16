@@ -20,13 +20,14 @@ namespace FlowTask_WinForms_Frontent
 
         private Color c = Color.FromArgb(0, 0, 0);
 
-        public Color DrawColor { 
+        public Color DrawColor
+        {
             get
             {
                 if (c != Color.FromArgb(0, 0, 0))
                     return c;
                 return (c = RandColor());
-            } 
+            }
         }
 
         static readonly List<string> UsedColors = new List<string>();
