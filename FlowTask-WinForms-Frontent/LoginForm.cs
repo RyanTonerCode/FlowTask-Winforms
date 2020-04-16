@@ -9,13 +9,25 @@ namespace FlowTask_WinForms_Frontent
         public LoginForm()
         {
             InitializeComponent();
-
             StartPosition = FormStartPosition.CenterScreen;
 
+            //default credentials
             tbxUsername.Text = "Default User";
             tbxPassword.Text = "password";
         }
 
+        /// <summary>
+        /// Update the username
+        /// </summary>
+        /// <param name="username"></param>
+        public void UpdateUsername(string username) => tbxUsername.Text = username;
+        
+
+        /// <summary>
+        /// Pull up the registration form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegistration_Click(object sender, EventArgs e) => Mediator.ShowForm(this, Mediator.RegistrationForm);
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -46,8 +58,8 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
 
+            //set information
             Mediator.CurrentUser = user;
-
             Mediator.AuthCookie = ac.Value;
 
             Mediator.ShowForm(this, Mediator.MainForm);

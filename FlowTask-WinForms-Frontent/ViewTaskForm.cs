@@ -162,7 +162,7 @@ namespace FlowTask_WinForms_Frontent
             return "s";
         }
 
-        private void drawDue(DateTime here)
+        private void drawNodesDue(DateTime here)
         {
             Font f = new Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
             Font f2 = new Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -196,7 +196,7 @@ namespace FlowTask_WinForms_Frontent
 
                     if (!node.Complete)
                     {
-                        if (DateTime.Now > node.Date)
+                        if (DateTime.Now > node.Date && DateTime.Now.Day > node.Date.Day)
                         {
                             var amt = (DateTime.Now - node.Date).Days;
                             node_subtext = string.Format("{0} overdue by {1} day{2}", node_subtext, amt, isPlural(amt));
@@ -207,7 +207,7 @@ namespace FlowTask_WinForms_Frontent
                         }
                         else
                         {
-                            var amt = (node.Date - DateTime.Now).Days;
+                            var amt = node.Date.Day - DateTime.Now.Day;
                             node_subtext = string.Format("{0} Due in {1} day{2}", node_subtext, amt, isPlural(amt));
                         }
                     }
@@ -216,7 +216,7 @@ namespace FlowTask_WinForms_Frontent
                         node_subtext = string.Format("{0} is complete!", node_subtext);
                     }
 
-                    System.Windows.Forms.Label info = new System.Windows.Forms.Label()
+                    System.Windows.Forms.Label lblInfo = new System.Windows.Forms.Label()
                     {
                         Font = f2,
                         Text = string.Format("{0}. {1} {2}", ++number, node.Name, node_subtext),
@@ -239,6 +239,28 @@ namespace FlowTask_WinForms_Frontent
                         TextAlign = ContentAlignment.MiddleCenter
                     };
 
+                    var toolTip = new ToolTip
+                    {
+                        ToolTipIcon = ToolTipIcon.Info,
+                        IsBalloon = true,
+                        ShowAlways = true
+                    };
+
+                    string toolTipText = "This node is incomplete. Check to mark as complete.";
+                    if (chbx.Checked) {
+
+                        FlowTask_Backend.Node next = myTask.Decomposition.GetSoonestNode();
+
+
+                        if (next != null && !string.IsNullOrEmpty(next.Name))
+                            toolTipText = string.Format("This node is complete! The next node is {0}.", next.Name);
+                        else
+                            toolTipText = "This node is complete! There are no remaining nodes in this task.";
+                    }
+                    
+
+                    toolTip.SetToolTip(chbx, toolTipText);
+
                     chbx.CheckedChanged += (object sender, EventArgs e) => {
                         var result = chbx.Checked;
                         var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
@@ -249,7 +271,7 @@ namespace FlowTask_WinForms_Frontent
                             myTask.Decomposition.Nodes[node.NodeIndex].SetCompleteStatus(result);
                             int x = myTask.RemainingFlowSteps;
 
-                            drawDue(here);
+                            drawNodesDue(here);
                             Mediator.MainForm.Redraw();
                         }
                         else
@@ -258,15 +280,15 @@ namespace FlowTask_WinForms_Frontent
                         }
                     };
 
-                    info.Controls.Add(chbx);
+                    lblInfo.Controls.Add(chbx);
 
-                    flowLayout.Controls.Add(info);
+                    flowLayout.Controls.Add(lblInfo);
                 }
         }
 
         private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
-            drawDue(sender.SelectedDate.Value);
+            drawNodesDue(sender.SelectedDate.Value);
             sfNodeCalendar.GoToDate(sender.SelectedDate.Value);
         }
 

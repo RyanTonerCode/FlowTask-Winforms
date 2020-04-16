@@ -79,7 +79,7 @@ namespace FlowTask_WinForms_Frontent
             foreach (var task in ObservableCollections.ObservableTaskCollection)
                 if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
                 {
-                    Label info = new Label()
+                    Label lblInfo = new Label()
                     {
                         Font = f2,
                         Text = string.Format("{0}. {1} ({2})", ++number, task.AssignmentName, task.Category),
@@ -92,9 +92,20 @@ namespace FlowTask_WinForms_Frontent
                         BorderStyle = BorderStyle.FixedSingle
                     };
 
-                    info.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
+                    lblInfo.Cursor = Cursors.Hand;
 
-                    flowLayout.Controls.Add(info);
+
+                    var toolTip = new ToolTip
+                    {
+                        ToolTipIcon = ToolTipIcon.Info,
+                        IsBalloon = true,
+                        ShowAlways = true
+                    };
+                    toolTip.SetToolTip(lblInfo, string.Format("Click to view {0}", task.AssignmentName));
+
+                    lblInfo.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
+
+                    flowLayout.Controls.Add(lblInfo);
                 }
         }
 

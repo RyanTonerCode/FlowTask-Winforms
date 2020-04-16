@@ -17,6 +17,11 @@ namespace FlowTask_WinForms_Frontent
             tbxConfirmPassword.TextChanged += tbxTextChanged;
         }
 
+        /// <summary>
+        /// Get the label associated with a given textbox
+        /// </summary>
+        /// <param name="textboxName"></param>
+        /// <returns></returns>
         private Label getAssociatedLabel(string textboxName)
         {
             foreach (Control c in pnlRegister.Controls)
@@ -28,8 +33,9 @@ namespace FlowTask_WinForms_Frontent
 
         private void btnCreateClicked(object sender, EventArgs e)
         {
-            bool valid = true;
+            bool valid_inputs = true;
 
+            //check to make sure all text boxes have input
             foreach (Control c in pnlRegister.Controls)
             {
                 if (c is TextBox)
@@ -39,8 +45,9 @@ namespace FlowTask_WinForms_Frontent
                         Label l = getAssociatedLabel(c.Name);
                         if (l != null)
                         {
+                            //show red text if they do not
                             l.ForeColor = Color.Red;
-                            valid = false;
+                            valid_inputs = false;
                         }
                         else
                             l.ForeColor = Color.Black;
@@ -48,9 +55,10 @@ namespace FlowTask_WinForms_Frontent
                 }
             }
 
-            if (!valid)
+            if (!valid_inputs)
                 return;
 
+            //retrieve all form data
             string username = tbxUsername.Text;
             string email = tbxEmail.Text;
             string pass = tbxPassword.Text;
@@ -61,30 +69,46 @@ namespace FlowTask_WinForms_Frontent
             if (!string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(confirm) && !pass.Equals(confirm))
                 return;
 
-            //if account create works, then show login
+            //All fields are validated
 
-            User u = new User(username, firstName, lastName, email, pass);
+            User temp_user = new User(username, firstName, lastName, email, pass);
 
-            (bool Succeeded, string ErrorMessage) = DatabaseController.dbController.WriteUser(u);
+            //write the user to the database
+            (bool Succeeded, string ErrorMessage) = DatabaseController.dbController.WriteUser(temp_user);
             if (!Succeeded)
             {
                 MessageBox.Show(ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             MessageBox.Show(string.Format("Hi {0}, your FlowTask account has been created!", username), ErrorMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Mediator.LoginForm.UpdateUsername(username);
+
             Mediator.ShowCaller();
         }
 
-        private void btnEscape_Click(object sender, EventArgs e)
-        {
-            Mediator.ShowCaller();
-        }
+        /// <summary>
+        /// return to the login form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEscape_Click(object sender, EventArgs e) => Mediator.ShowCaller();
 
+        /// <summary>
+        /// Reset the label text to black after user has figured out how to type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbxTextChanged(object sender, EventArgs e)
         {
             getAssociatedLabel(((TextBox)sender).Name).ForeColor = Color.Black;
         }
 
+        /// <summary>
+        /// Confirm that the password confirmation is correct
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbxConfirmPassword_TextChanged(object sender, EventArgs e)
         {
             string pass = tbxPassword.Text;
