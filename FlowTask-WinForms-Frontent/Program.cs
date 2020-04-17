@@ -38,6 +38,8 @@ namespace FlowTask_WinForms_Frontent
             /// <returns>Returns the license key.</returns>
             public static string FindLicenseKey()
             {
+                return "MDAxQDMxMzgyZTMxMmUzMFZBc0pXbU9QVDMwbkFSUHlXMGs4RFVXZk43dERTYzZhK1E3N1dUQ05uR3M9";
+                /*
                 string licenseKeyFile = @"C:\Users\Public\Documents\Syncfusion\Windows\18.1.0.42\Common\SyncfusionLicense.txt";
                 for (int n = 0; n < 20; n++)
                 {
@@ -49,6 +51,7 @@ namespace FlowTask_WinForms_Frontent
                     return File.ReadAllText(licenseKeyFile);
                 }
                 return string.Empty;
+                */
             }
         }
 
