@@ -123,8 +123,8 @@ namespace FlowTask_WinForms_Frontent
         /// <param name="defaultTask"></param>
         public static void ShowViewTask(Task defaultTask)
         {
-            if (viewTaskForm == null || viewTaskForm.IsDisposed)
-                viewTaskForm = new ViewTaskForm(defaultTask);
+            //always make a new form here
+            viewTaskForm = new ViewTaskForm(defaultTask);
             viewTaskForm.Show();
         }
 

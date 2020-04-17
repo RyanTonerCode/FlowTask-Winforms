@@ -290,7 +290,7 @@ namespace FlowTask_WinForms_Frontent
         }
 
         /// <summary>
-        /// Open the selected task
+        /// Open all selected tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -303,8 +303,7 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
             foreach (SelectableTaskDecorator task in Selected)
-                if (task.Selected)
-                    Mediator.ShowViewTask(task);
+                Mediator.ShowViewTask(task);
         }
     }
 }

@@ -50,17 +50,17 @@
             this.panel1.Controls.Add(this.tbxUsername);
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(12, 85);
+            this.panel1.Location = new System.Drawing.Point(25, 85);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(512, 223);
+            this.panel1.Size = new System.Drawing.Size(499, 223);
             this.panel1.TabIndex = 0;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(27, 31);
+            this.lblUsername.Location = new System.Drawing.Point(11, 30);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(97, 22);
             this.lblUsername.TabIndex = 8;
@@ -84,7 +84,7 @@
             // tbxPassword
             // 
             this.tbxPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPassword.Location = new System.Drawing.Point(141, 80);
+            this.tbxPassword.Location = new System.Drawing.Point(125, 79);
             this.tbxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbxPassword.MaxLength = 30;
             this.tbxPassword.Name = "tbxPassword";
@@ -96,7 +96,7 @@
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(27, 80);
+            this.lblPassword.Location = new System.Drawing.Point(11, 79);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(94, 22);
             this.lblPassword.TabIndex = 5;
@@ -105,7 +105,7 @@
             // tbxUsername
             // 
             this.tbxUsername.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxUsername.Location = new System.Drawing.Point(141, 28);
+            this.tbxUsername.Location = new System.Drawing.Point(125, 27);
             this.tbxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
