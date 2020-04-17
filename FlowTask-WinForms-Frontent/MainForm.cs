@@ -96,36 +96,35 @@ namespace FlowTask_WinForms_Frontent
             //show the tasks due on this day
 
             int taskNumber = 0;
-            foreach (var task in ObservableCollections.ObservableTaskCollection)
-                if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
+            foreach (var task in GetDrawListForDay(here))
+            {
+                Label lblInfo = new Label()
                 {
-                    Label lblInfo = new Label()
-                    {
-                        Font = taskLabelFont,
-                        Text = string.Format("{0}. {1} ({2})", ++taskNumber, task.AssignmentName, task.Category),
-                        Margin = new Padding(0),
-                        Padding = new Padding(15, 4, 4, 4),
-                        Height = 36,
-                        BackColor = Color.White,
-                        ForeColor = task.DrawColor,
-                        Width = flwTaskLayout.Width,
-                        BorderStyle = BorderStyle.FixedSingle
-                    };
+                    Font = taskLabelFont,
+                    Text = string.Format("{0}. {1} ({2})", ++taskNumber, task.AssignmentName, task.Category),
+                    Margin = new Padding(0),
+                    Padding = new Padding(15, 4, 4, 4),
+                    Height = 36,
+                    BackColor = Color.White,
+                    ForeColor = task.DrawColor,
+                    Width = flwTaskLayout.Width,
+                    BorderStyle = BorderStyle.FixedSingle
+                };
 
-                    lblInfo.Cursor = Cursors.Hand;
+                lblInfo.Cursor = Cursors.Hand;
 
-                    var toolTip = new ToolTip
-                    {
-                        ToolTipIcon = ToolTipIcon.Info,
-                        IsBalloon = true,
-                        ShowAlways = true
-                    };
-                    toolTip.SetToolTip(lblInfo, string.Format("Click to view task info for {0}", task.AssignmentName));
+                var toolTip = new ToolTip
+                {
+                    ToolTipIcon = ToolTipIcon.Info,
+                    IsBalloon = true,
+                    ShowAlways = true
+                };
+                toolTip.SetToolTip(lblInfo, string.Format("Click to view task info for {0}", task.AssignmentName));
 
-                    lblInfo.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
+                lblInfo.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
 
-                    flwTaskLayout.Controls.Add(lblInfo);
-                }
+                flwTaskLayout.Controls.Add(lblInfo);
+            }
         }
 
         /// <summary>
@@ -138,6 +137,11 @@ namespace FlowTask_WinForms_Frontent
             drawTaskDue(sender.SelectedDate.Value);
         }
 
+        /// <summary>
+        /// Pretty print each row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
         {
             int index = e.RowIndex - 1;
@@ -159,6 +163,11 @@ namespace FlowTask_WinForms_Frontent
             }
         }
 
+        private List<SelectableTaskDecorator> GetDrawListForDay(DateTime here)
+        {
+            return ObservableCollections.ObservableTaskCollection.Where(x => x.SubmissionDate.DayOfYear == here.DayOfYear && x.SubmissionDate.Year == here.Year).ToList(); 
+        }
+
         /// <summary>
         /// Draw the mini task rectangles in the calendar
         /// </summary>
@@ -168,20 +177,19 @@ namespace FlowTask_WinForms_Frontent
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            List<SelectableTaskDecorator> to_draw = new List<SelectableTaskDecorator>();
-
+            //darken the trailing dates (not in the current month)
             if (args.IsTrailingDate)
                 args.ForeColor = Color.DarkGray;
 
-            DateTime here = args.Value.Value;
-
-            foreach (var task in ObservableCollections.ObservableTaskCollection)
-                if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
-                    to_draw.Add(task);
-
             int startPosition = 0;
 
-            foreach (var task in to_draw)
+            //ensure a date is selected
+            if (!args.Value.HasValue)
+                return;
+
+            var drawList = GetDrawListForDay(args.Value.Value);
+
+            foreach (var task in drawList)
             {
                 args.Handled = true;
 
@@ -189,7 +197,7 @@ namespace FlowTask_WinForms_Frontent
 
                 TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, FontStyle.Regular), args.CellBounds, c, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-                args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
+                args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (drawList.Count * 2) - (drawList.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 13, 13));
                 startPosition -= 18;
             }
 
@@ -197,31 +205,49 @@ namespace FlowTask_WinForms_Frontent
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            lblWelcome.Text = "Welcome to FlowTask " + Mediator.CurrentUser.Username + "!";
+            //greeting
+            lblWelcome.Text = string.Format("Welcome to FlowTask {0}!",Mediator.CurrentUser.Username);
 
+            //update count when task list is changed
             ObservableCollections.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
 
+            //generate selectable task decorators from the task list
             foreach (Task t in Mediator.CurrentUser.Tasks)
                 ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
 
+            //show the tasks for the current day
             drawTaskDue(DateTime.Today);
         }
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (ObservableCollections.ObservableTaskCollection.Count == 0)
+            //show the number of tasks remaining
+            var count = ObservableCollections.ObservableTaskCollection.Count;
+            if (count == 0)
                 lblTasks.Text = "Congrats, you have no tasks left!";
             else
-                lblTasks.Text = string.Format("You have {0} task{1}!", ObservableCollections.ObservableTaskCollection.Count, (ObservableCollections.ObservableTaskCollection.Count == 1 ? "" : "s"));
+                lblTasks.Text = string.Format("You have {0} task{1}!", count, Mediator.IsPlural(count));
 
-            drawTaskDue(sfTaskCalendar.SelectedDate.Value);
+            //show the tasks view for the updated task
+            if(sfTaskCalendar.SelectedDate.HasValue)
+                drawTaskDue(sfTaskCalendar.SelectedDate.Value);
         }
 
+        /// <summary>
+        /// Open the task creation page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCreateTask_Click(object sender, EventArgs e)
         {
             Mediator.ShowTaskCreation(sfTaskCalendar.SelectedDate);
         }
 
+        /// <summary>
+        /// Remove all selected tasks with confirmation dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDeleteClick(object sender, EventArgs e)
         {
             var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);
@@ -230,36 +256,44 @@ namespace FlowTask_WinForms_Frontent
                 MessageBox.Show("Please select a task first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var to_remove = new List<SelectableTaskDecorator>();
+            var to_remove = new List<SelectableTaskDecorator>(Selected.Count());
 
             foreach (SelectableTaskDecorator task in Selected)
             {
-                if (task.Selected)
+                DialogResult dr = MessageBox.Show(string.Format("Are you sure you want to delete your task ({0})?", task.AssignmentName), "Please confirm!", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
+
+                if (dr == DialogResult.Yes)
                 {
-                    DialogResult dr = MessageBox.Show(string.Format("Are you sure you want to delete your task ({0})?", task.AssignmentName), "Please confirm!", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
+                    //TaskCollection.ObservableTaskCollection.Remove(task);
+                    DatabaseController.dbController.DeleteTask(task, Mediator.AuthCookie);
 
-                    if (dr == DialogResult.Yes)
-                    {
-                        //TaskCollection.ObservableTaskCollection.Remove(task);
-                        DatabaseController.dbController.DeleteTask(task, Mediator.AuthCookie);
-
-                        to_remove.Add(task);
-                    }
+                    to_remove.Add(task);
                 }
             }
 
+            //remove all confirmed tasks
             foreach (var task in to_remove)
                 ObservableCollections.ObservableTaskCollection.Remove(task);
 
             to_remove.Clear();
         }
 
+        /// <summary>
+        /// Close the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogoutClicked(object sender, EventArgs e)
         {
             Mediator.Logout();
         }
 
+        /// <summary>
+        /// Open the selected task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnView_Click(object sender, EventArgs e)
         {
             var Selected = ObservableCollections.ObservableTaskCollection.Where(x => x.Selected);

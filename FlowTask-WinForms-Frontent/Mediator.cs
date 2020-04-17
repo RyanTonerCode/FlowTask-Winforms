@@ -128,5 +128,17 @@ namespace FlowTask_WinForms_Frontent
             viewTaskForm.Show();
         }
 
+        /// <summary>
+        /// Returns an s for plural numbers.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string IsPlural(int value)
+        {
+            if (value == 1)
+                return "";
+            return "s";
+        }
+
     }
 }

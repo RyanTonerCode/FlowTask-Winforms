@@ -155,13 +155,6 @@ namespace FlowTask_WinForms_Frontent
         }
         #endregion
 
-        private string isPlural(int value)
-        {
-            if (value == 1)
-                return "";
-            return "s";
-        }
-
         private void drawNodesDue(DateTime here)
         {
             Font f = new Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -199,7 +192,7 @@ namespace FlowTask_WinForms_Frontent
                         if (DateTime.Now > node.Date && DateTime.Now.Day > node.Date.Day)
                         {
                             var amt = (DateTime.Now - node.Date).Days;
-                            node_subtext = string.Format("{0} overdue by {1} day{2}", node_subtext, amt, isPlural(amt));
+                            node_subtext = string.Format("{0} overdue by {1} day{2}", node_subtext, amt, Mediator.IsPlural(amt));
                         }
                         else if (DateTime.Now.Day == node.Date.Day)
                         {
@@ -208,7 +201,7 @@ namespace FlowTask_WinForms_Frontent
                         else
                         {
                             var amt = node.Date.Day - DateTime.Now.Day;
-                            node_subtext = string.Format("{0} Due in {1} day{2}", node_subtext, amt, isPlural(amt));
+                            node_subtext = string.Format("{0} Due in {1} day{2}", node_subtext, amt, Mediator.IsPlural(amt));
                         }
                     }
                     else
