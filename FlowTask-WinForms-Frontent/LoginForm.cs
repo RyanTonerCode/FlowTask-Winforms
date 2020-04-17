@@ -47,7 +47,7 @@ namespace FlowTask_WinForms_Frontent
                 return;
             }
 
-            (User user, AuthorizationCookie? ac) = DatabaseController.dbController.GetUser(username, password);
+            (User user, AuthorizationCookie? ac) = DatabaseController.GetDBController().GetUser(username, password);
 
 
             if (user == null || !ac.HasValue)

@@ -267,7 +267,7 @@ namespace FlowTask_WinForms_Frontent
                 if (dr == DialogResult.Yes)
                 {
                     //TaskCollection.ObservableTaskCollection.Remove(task);
-                    DatabaseController.dbController.DeleteTask(task, Mediator.AuthCookie);
+                    DatabaseController.GetDBController().DeleteTask(task, Mediator.AuthCookie);
 
                     to_remove.Add(task);
                 }

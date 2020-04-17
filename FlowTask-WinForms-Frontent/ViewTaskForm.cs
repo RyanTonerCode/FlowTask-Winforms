@@ -281,7 +281,7 @@ namespace FlowTask_WinForms_Frontent
                 chbx.CheckedChanged += (object sender, EventArgs e) =>
                 {
                     var result = chbx.Checked;
-                    var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
+                    var (Success, ErrorMessage) = DatabaseController.GetDBController().UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
                     if (Success)
                     {
                         node.SetCompleteStatus(result);

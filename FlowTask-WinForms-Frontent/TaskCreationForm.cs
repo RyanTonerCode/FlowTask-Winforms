@@ -48,7 +48,7 @@ namespace FlowTask_WinForms_Frontent
             Task newTask = new Task(name.Trim(), date, cat, Mediator.CurrentUser.UserID);
 
             //create the task in the database
-            (bool result, string error, Task task_returned) = DatabaseController.dbController.WriteTask(newTask, Mediator.AuthCookie);
+            (bool result, string error, Task task_returned) = DatabaseController.GetDBController().WriteTask(newTask, Mediator.AuthCookie);
 
             if (result == false)
             {

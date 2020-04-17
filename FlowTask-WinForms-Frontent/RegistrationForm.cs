@@ -74,7 +74,7 @@ namespace FlowTask_WinForms_Frontent
             User temp_user = new User(username, firstName, lastName, email, pass);
 
             //write the user to the database
-            (bool Succeeded, string ErrorMessage) = DatabaseController.dbController.WriteUser(temp_user);
+            (bool Succeeded, string ErrorMessage) = DatabaseController.GetDBController().WriteUser(temp_user);
             if (!Succeeded)
             {
                 MessageBox.Show(ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
