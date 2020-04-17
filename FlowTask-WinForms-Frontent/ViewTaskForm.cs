@@ -6,39 +6,52 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
     public partial class ViewTaskForm : Form
     {
+        /// <summary>
+        /// The task this form is displaying
+        /// </summary>
         private readonly Task myTask;
 
+        /// <summary>
+        /// Get an observable collection for this task's nodes
+        /// </summary>
         readonly ObservableCollection<NodeDecorator> nodes = ObservableCollections.ObservableNodeCollection;
 
+        /// <summary>
+        /// Create a task view form for the inut task
+        /// </summary>
+        /// <param name="toShow"></param>
         public ViewTaskForm(Task toShow)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             DoubleBuffered = true;
 
+            //update ui relative to task info
             myTask = toShow;
             DateTime firstDate = DateTime.Now;
             if (myTask != null)
             {
-                Text = string.Format("View Task {0}", myTask.AssignmentName);
+                
+                Text = string.Format("View Task: {0} - {1} Nodes Remaining", myTask.AssignmentName, myTask.RemainingFlowSteps);
                 foreach (var n in myTask.Decomposition.Nodes)
                     nodes.Add(new NodeDecorator(n));
 
                 firstDate = myTask.Decomposition.GetSoonestDate();
             }
 
+            //create the diagram and set layout manager
             sfTreeDiagram.BeginUpdate();
             DiagramAppearance();
             PopulateNodes();
 
-
-            DirectedTreeLayoutManager dtlm = new DirectedTreeLayoutManager(sfTreeDiagram.Model, 0, 40, 50)
+            var dtlm = new DirectedTreeLayoutManager(sfTreeDiagram.Model, 0, 40, 50)
             {
                 TopMargin = 1,
                 LeftMargin = 50,
@@ -46,11 +59,7 @@ namespace FlowTask_WinForms_Frontent
             };
             sfTreeDiagram.LayoutManager = dtlm;
             sfTreeDiagram.LayoutManager.UpdateLayout(null);
-
-            sfTreeDiagram.AlignCenter();
-
             sfTreeDiagram.View.SelectionList.Clear();
-
             sfTreeDiagram.EndUpdate();
 
             sfNodeCalendar.DrawCell += SfCalendarDrawCell;
@@ -61,7 +70,10 @@ namespace FlowTask_WinForms_Frontent
             sfNodeCalendar.TrailingDatesVisible = true;
         }
 
-        #region Diagram
+        #region Diagram Generation
+        /// <summary>
+        /// Set the model appearance
+        /// </summary>
         private void DiagramAppearance()
         {
             sfTreeDiagram.Model.LineStyle.LineColor = Color.LightGray;
@@ -73,9 +85,14 @@ namespace FlowTask_WinForms_Frontent
             sfTreeDiagram.View.SelectionList.Clear();
         }
 
-        string GetNodeText(FlowTask_Backend.Node n)
+        /// <summary>
+        /// Get the rectangle text for a given node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        string GetNodeText(FlowTask_Backend.Node node)
         {
-            return string.Format("{0} due on {1}", n.Name, n.Date.ToString("dddd, dd MMMM yyyy"));
+            return string.Format("{0} due on {1}", node.Name, node.Date.ToString("dddd, dd MMMM yyyy"));
         }
 
         /// <summary>
@@ -92,6 +109,7 @@ namespace FlowTask_WinForms_Frontent
             rootRectangle.FillStyle.Type = FillStyleType.LinearGradient;
             rootRectangle.FillStyle.ForeColor = Color.White;
 
+            //give it a label with the node text
             Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(rootRectangle, GetNodeText(root));
             label.FontStyle.Family = "Segoe UI";
             label.FontStyle.Size = 10;
@@ -100,7 +118,7 @@ namespace FlowTask_WinForms_Frontent
 
             sfTreeDiagram.Model.AppendChild(rootRectangle);
 
-
+            //recursively populate children
             foreach (var neighbor in myTask.Decomposition.GetNeighbors(root.NodeIndex))
                 GenerateInnerLevelNodes(rootRectangle, nodes[neighbor.NodeIndex]);
         }
@@ -129,13 +147,14 @@ namespace FlowTask_WinForms_Frontent
 
             ConnectNodes(parentRect, childRect);
 
+            //recursively populate children
             foreach (var neighbor in myTask.Decomposition.GetNeighbors(curNode.NodeIndex))
                 GenerateInnerLevelNodes(childRect, nodes[neighbor.NodeIndex]);
 
         }
 
         /// <summary>
-        /// Connects the given nodes
+        /// Connects the given nodes with an arrow
         /// </summary>
         /// <param name="parentNode">Parent Node</param>
         /// <param name="childNode">Child node</param>
@@ -153,12 +172,14 @@ namespace FlowTask_WinForms_Frontent
                 sfTreeDiagram.Model.SendToBack(lConnector);
             }
         }
-        #endregion
+        #endregion Information
+
+        private static readonly Font nodeHeadingFont = new Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
+        private static readonly Font nodeLabelFont = new Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
 
         private void drawNodesDue(DateTime here)
         {
-            Font f = new Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
-            Font f2 = new Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, GraphicsUnit.Point, 0);
+            Text = string.Format("View Task: {0} - {1} Nodes Remaining", myTask.AssignmentName, myTask.RemainingFlowSteps);
 
             flowLayout.FlowDirection = FlowDirection.TopDown;
 
@@ -166,9 +187,9 @@ namespace FlowTask_WinForms_Frontent
             flowLayout.BackColor = Color.White;
 
             flowLayout.Controls.Clear();
-            var header = new System.Windows.Forms.Label()
+            var lblHeader = new System.Windows.Forms.Label()
             {
-                Font = f,
+                Font = nodeHeadingFont,
                 Text = string.Format("Nodes due on {0}", here.ToString("dddd, dd MMMM yyyy")),
                 Padding = new Padding(4, 4, 4, 4),
                 Margin = new Padding(0),
@@ -179,130 +200,155 @@ namespace FlowTask_WinForms_Frontent
                 BorderStyle = BorderStyle.FixedSingle,
             };
 
-            flowLayout.Controls.Add(header);
+            flowLayout.Controls.Add(lblHeader);
+
+            var now = DateTime.Now;
 
             int number = 0;
-            foreach (var node in nodes)
-                if (here.Day == node.Date.Day && here.Month == node.Date.Month && here.Year == node.Date.Year)
-                {
-                    string node_subtext = string.IsNullOrEmpty(node.Text) ? "" : string.Format("({0})", node.Text);
+            foreach (var node in GetDrawListForDay(here))
+            {
+                string node_subtext = string.IsNullOrEmpty(node.Text) ? "" : string.Format("({0})", node.Text);
 
-                    if (!node.Complete)
+                if (!node.Complete)
+                {
+                    if (now > node.Date && now.DayOfYear > node.Date.DayOfYear)
                     {
-                        if (DateTime.Now > node.Date && DateTime.Now.Day > node.Date.Day)
-                        {
-                            var amt = (DateTime.Now - node.Date).Days;
-                            node_subtext = string.Format("{0} overdue by {1} day{2}", node_subtext, amt, Mediator.IsPlural(amt));
-                        }
-                        else if (DateTime.Now.Day == node.Date.Day)
-                        {
-                            node_subtext = string.Format("{0} is due today!", node_subtext);
-                        }
-                        else
-                        {
-                            var amt = node.Date.Day - DateTime.Now.Day;
-                            node_subtext = string.Format("{0} Due in {1} day{2}", node_subtext, amt, Mediator.IsPlural(amt));
-                        }
+                        var offset_days = (now - node.Date).Days;
+                        node_subtext = string.Format("{0} overdue by {1} day{2}", node_subtext, offset_days, Mediator.IsPlural(offset_days));
+                    }
+                    else if (now.DayOfYear == node.Date.DayOfYear && now.Year == node.Date.Year)
+                    {
+                        node_subtext = string.Format("{0} is due today!", node_subtext);
                     }
                     else
                     {
-                        node_subtext = string.Format("{0} is complete!", node_subtext);
+                        //due in the future
+                        var offset_days = (node.Date - DateTime.Now).Days;
+                        node_subtext = string.Format("{0} Due in {1} day{2}", node_subtext, offset_days, Mediator.IsPlural(offset_days));
                     }
-
-                    System.Windows.Forms.Label lblInfo = new System.Windows.Forms.Label()
-                    {
-                        Font = f2,
-                        Text = string.Format("{0}. {1} {2}", ++number, node.Name, node_subtext),
-                        Margin = new Padding(0),
-                        Padding = new Padding(28, 4, 4, 4),
-                        Height = 36,
-                        BackColor = Color.White,
-                        ForeColor = node.DrawColor,
-                        Width = flowLayout.Width,
-                        BorderStyle = BorderStyle.FixedSingle
-                    };
-
-                    CheckBox chbx = new SizableCheckBox
-                    {
-                        Size = new Size(22, 22),
-                        Margin = new Padding(0),
-                        Location = new Point(7, 7),
-                        Padding = new Padding(0, 0, 0, 0),
-                        Checked = node.Complete,
-                        TextAlign = ContentAlignment.MiddleCenter
-                    };
-
-                    var toolTip = new ToolTip
-                    {
-                        ToolTipIcon = ToolTipIcon.Info,
-                        IsBalloon = true,
-                        ShowAlways = true
-                    };
-
-                    string toolTipText = "This node is incomplete. Check to mark as complete.";
-                    if (chbx.Checked) {
-
-                        FlowTask_Backend.Node next = myTask.Decomposition.GetSoonestNode();
-
-
-                        if (next != null && !string.IsNullOrEmpty(next.Name))
-                            toolTipText = string.Format("This node is complete! The next node is {0}.", next.Name);
-                        else
-                            toolTipText = "This node is complete! There are no remaining nodes in this task.";
-                    }
-                    
-
-                    toolTip.SetToolTip(chbx, toolTipText);
-
-                    chbx.CheckedChanged += (object sender, EventArgs e) => {
-                        var result = chbx.Checked;
-                        var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
-                        if (Success)
-                        {
-                            node.SetCompleteStatus(result);
-                            //update the task node to reflect the change.
-                            myTask.Decomposition.Nodes[node.NodeIndex].SetCompleteStatus(result);
-                            int x = myTask.RemainingFlowSteps;
-
-                            drawNodesDue(here);
-                            Mediator.MainForm.Redraw();
-                        }
-                        else
-                        {
-                            MessageBox.Show(ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    };
-
-                    lblInfo.Controls.Add(chbx);
-
-                    flowLayout.Controls.Add(lblInfo);
                 }
+                else
+                {
+                    node_subtext = string.Format("{0} is complete!", node_subtext);
+                }
+
+                System.Windows.Forms.Label lblNodeInfo = new System.Windows.Forms.Label()
+                {
+                    Font = nodeLabelFont,
+                    Text = string.Format("{0}. {1} {2}", ++number, node.Name, node_subtext),
+                    Margin = new Padding(0),
+                    Padding = new Padding(28, 4, 4, 4),
+                    Height = 36,
+                    BackColor = Color.White,
+                    ForeColor = node.DrawColor,
+                    Width = flowLayout.Width,
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+
+                //completion checkbox to left of label
+                CheckBox chbx = new SizableCheckBox
+                {
+                    Size = new Size(22, 22),
+                    Margin = new Padding(0),
+                    Location = new Point(7, 7),
+                    Padding = new Padding(0, 0, 0, 0),
+                    Checked = node.Complete,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                //tool tip to say what the chckbox does
+                var toolTip = new ToolTip
+                {
+                    ToolTipIcon = ToolTipIcon.Info,
+                    IsBalloon = true,
+                    ShowAlways = true
+                };
+
+                string toolTipText = "This node is incomplete. Check to mark as complete.";
+                if (chbx.Checked)
+                {
+
+                    FlowTask_Backend.Node next = myTask.Decomposition.GetSoonestNode();
+
+                    if (next != null && !string.IsNullOrEmpty(next.Name))
+                        toolTipText = string.Format("This node is complete! The next node is {0}.", next.Name);
+                    else
+                        toolTipText = "This node is complete! There are no remaining nodes in this task.";
+                }
+
+                toolTip.SetToolTip(chbx, toolTipText);
+
+                chbx.CheckedChanged += (object sender, EventArgs e) =>
+                {
+                    var result = chbx.Checked;
+                    var (Success, ErrorMessage) = DatabaseController.dbController.UpdateComplete(Mediator.AuthCookie, myTask.UserID, node.NodeID, result);
+                    if (Success)
+                    {
+                        node.SetCompleteStatus(result);
+                        //update the task node to reflect the change.
+                        myTask.Decomposition.Nodes[node.NodeIndex].SetCompleteStatus(result);
+                        int x = myTask.RemainingFlowSteps;
+
+                        drawNodesDue(here);
+                        Mediator.MainForm.Redraw();
+                    }
+                    else
+                    {
+                        //the database failed to process the node completion update
+                        MessageBox.Show(ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                };
+
+                lblNodeInfo.Controls.Add(chbx);
+
+                flowLayout.Controls.Add(lblNodeInfo);
+            }
         }
 
+        /// <summary>
+        /// Redraw the nodes due panel 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
-            drawNodesDue(sender.SelectedDate.Value);
-            sfNodeCalendar.GoToDate(sender.SelectedDate.Value);
+            //show nodes due on this date
+            if (sender.SelectedDate.HasValue)
+            {
+                drawNodesDue(sender.SelectedDate.Value);
+                //sfNodeCalendar.GoToDate(sender.SelectedDate.Value);
+            }
+        }
+
+        /// <summary>
+        /// List of nodes to draw for the day
+        /// </summary>
+        /// <param name="here"></param>
+        /// <returns></returns>
+        private List<NodeDecorator> GetDrawListForDay(DateTime here)
+        {
+            return nodes.Where(x => x.Date.DayOfYear == here.DayOfYear && x.Date.Year == here.Year).ToList();
         }
 
         void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            List<NodeDecorator> to_draw = new List<NodeDecorator>();
-
             if (args.IsTrailingDate)
                 args.ForeColor = Color.DarkGray;
 
+
+            //ensure a date is selected
+            if (!args.Value.HasValue)
+                return;
+
             DateTime here = args.Value.Value;
 
-            foreach (var node in nodes)
-                if (here.Day == node.Date.Day && here.Month == node.Date.Month && here.Year == node.Date.Year)
-                    to_draw.Add(node);
+            var drawList = GetDrawListForDay(here);
 
             int startPosition = 0;
 
-            foreach (var task in to_draw)
+            foreach (var task in drawList)
             {
                 args.Handled = true;
 
@@ -310,7 +356,7 @@ namespace FlowTask_WinForms_Frontent
 
                 TextRenderer.DrawText(args.Graphics, args.Value.Value.Day.ToString(), new Font("Segoe UI", 10, System.Drawing.FontStyle.Regular), args.CellBounds, c, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-                args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new System.Drawing.Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (to_draw.Count * 2) - (to_draw.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 12, 12));
+                args.Graphics.FillRectangle(new SolidBrush(task.DrawColor), new System.Drawing.Rectangle((args.CellBounds.X + (args.CellBounds.Width - args.CellBounds.Width / 2)) - (drawList.Count * 2) - (drawList.Count * 6) - startPosition, (args.CellBounds.Y + (args.CellBounds.Height - 20)), 13, 13));
                 startPosition -= 18;
             }
 

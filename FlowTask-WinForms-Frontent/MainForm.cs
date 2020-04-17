@@ -113,6 +113,7 @@ namespace FlowTask_WinForms_Frontent
 
                 lblInfo.Cursor = Cursors.Hand;
 
+                //tool tip to inform user how to open task view
                 var toolTip = new ToolTip
                 {
                     ToolTipIcon = ToolTipIcon.Info,
