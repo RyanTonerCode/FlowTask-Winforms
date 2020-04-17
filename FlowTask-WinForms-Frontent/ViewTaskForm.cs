@@ -12,7 +12,7 @@ namespace FlowTask_WinForms_Frontent
 {
     public partial class ViewTaskForm : Form
     {
-        private Task myTask;
+        private readonly Task myTask;
 
         readonly ObservableCollection<NodeDecorator> nodes = ObservableCollections.ObservableNodeCollection;
 

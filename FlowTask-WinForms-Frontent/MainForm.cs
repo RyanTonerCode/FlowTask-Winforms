@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace FlowTask_WinForms_Frontent
 {
+    /// <summary>
+    /// The main form/ home page for the user to see their task overview/ task list
+    /// </summary>
     public partial class MainForm : Form
     {
 
@@ -21,27 +24,37 @@ namespace FlowTask_WinForms_Frontent
             StartPosition = FormStartPosition.CenterScreen;
             DoubleBuffered = true;
 
+            //specialized drawing method to show what dates have tasks
             sfTaskCalendar.DrawCell += SfCalendarDrawCell;
+            //specialized selection method to update UI to show tasks on that date
             sfTaskCalendar.SelectionChanged += SfCalendarOverview_SelectionChanged;
 
+            //set the data binding
             sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
-
             sfDataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowChildViewUpdate;
 
+            //create columns for the data grid with the associated binding maps
             sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(18, 18) });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name", MinimumWidth = 200 });
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)", MinimumWidth = 200 });
-            sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date" });
+            sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date", MinimumWidth = 150 });
+            //set the last column to fill
             sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Nodes", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
 
+            //do not allow selection
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
+            //special painting of the rows
             sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
+            //fill the entire grid
             sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             sfDataGrid.RowHeight = 40;
 
             Disposed += MainPage_Disposed;
         }
 
+        /// <summary>
+        /// Tell the data grid to update (especially if an observable property changed)
+        /// </summary>
         public void Redraw() { sfDataGrid.Refresh(); }
 
         private void MainPage_Disposed(object sender, EventArgs e)
@@ -49,51 +62,57 @@ namespace FlowTask_WinForms_Frontent
             Mediator.Logout();
         }
 
-        private void drawDue(DateTime here)
+        private static readonly Font taskHeadingFont = new Font("Segoe UI Semibold", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        private static readonly Font taskLabelFont = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+        /// <summary>
+        /// Updates the task due flowLayoutPanel
+        /// </summary>
+        /// <param name="here"></param>
+        private void drawTaskDue(DateTime here)
         {
-            Font f = new Font("Segoe UI Semibold", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Font f2 = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            flwTaskLayout.FlowDirection = FlowDirection.TopDown;
+            flwTaskLayout.ForeColor = Color.White;
+            flwTaskLayout.BackColor = Color.White;
 
-            flowLayout.FlowDirection = FlowDirection.TopDown;
+            flwTaskLayout.Controls.Clear();
 
-            flowLayout.ForeColor = Color.White;
-            flowLayout.BackColor = Color.White;
 
-            flowLayout.Controls.Clear();
-            Label header = new Label()
+            Label lblHeader = new Label()
             {
-                Font = f,
+                Font = taskHeadingFont,
                 Text = string.Format("Tasks due on {0}", here.ToString("dddd, dd MMMM yyyy")),
                 Padding = new Padding(4, 4, 4, 4),
                 Margin = new Padding(0),
                 Height = 40,
-                Width = flowLayout.Width,
+                Width = flwTaskLayout.Width,
                 ForeColor = Color.Black,
                 BackColor = Color.LightBlue,
                 BorderStyle = BorderStyle.FixedSingle,
             };
 
-            flowLayout.Controls.Add(header);
+            flwTaskLayout.Controls.Add(lblHeader);
 
-            int number = 0;
+            //show the tasks due on this day
+
+            int taskNumber = 0;
             foreach (var task in ObservableCollections.ObservableTaskCollection)
                 if (here.Day == task.SubmissionDate.Day && here.Month == task.SubmissionDate.Month && here.Year == task.SubmissionDate.Year)
                 {
                     Label lblInfo = new Label()
                     {
-                        Font = f2,
-                        Text = string.Format("{0}. {1} ({2})", ++number, task.AssignmentName, task.Category),
+                        Font = taskLabelFont,
+                        Text = string.Format("{0}. {1} ({2})", ++taskNumber, task.AssignmentName, task.Category),
                         Margin = new Padding(0),
                         Padding = new Padding(15, 4, 4, 4),
-                        Height = 35,
+                        Height = 36,
                         BackColor = Color.White,
                         ForeColor = task.DrawColor,
-                        Width = flowLayout.Width,
+                        Width = flwTaskLayout.Width,
                         BorderStyle = BorderStyle.FixedSingle
                     };
 
                     lblInfo.Cursor = Cursors.Hand;
-
 
                     var toolTip = new ToolTip
                     {
@@ -101,37 +120,50 @@ namespace FlowTask_WinForms_Frontent
                         IsBalloon = true,
                         ShowAlways = true
                     };
-                    toolTip.SetToolTip(lblInfo, string.Format("Click to view {0}", task.AssignmentName));
+                    toolTip.SetToolTip(lblInfo, string.Format("Click to view task info for {0}", task.AssignmentName));
 
                     lblInfo.Click += (object sender, EventArgs e) => Mediator.ShowViewTask(task);
 
-                    flowLayout.Controls.Add(lblInfo);
+                    flwTaskLayout.Controls.Add(lblInfo);
                 }
         }
 
+        /// <summary>
+        /// Retrieve the tasks due on the selected date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
-            drawDue(sender.SelectedDate.Value);
+            drawTaskDue(sender.SelectedDate.Value);
         }
 
         private void SfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
         {
             int index = e.RowIndex - 1;
 
+            //do not paint the header
             if (index == -1)
                 return;
 
+            //custom cell style
             e.Style.TextMargins = new Padding(3, 3, 3, 3);
-
             e.Style.Font = new Syncfusion.WinForms.DataGrid.Styles.GridFontInfo(new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Point));
 
-            var color = ObservableCollections.ObservableTaskCollection[index].DrawColor;
-            if (e.Column.MappingName != "Selected")
+            //check to make sure the row data is valid
+            if (e.DataRow.RowData is SelectableTaskDecorator st)
             {
-                e.Style.BackColor = color;
+                //paint the background to the task color
+                if (e.Column.MappingName != "Selected")
+                    e.Style.BackColor = st.DrawColor;
             }
         }
 
+        /// <summary>
+        /// Draw the mini task rectangles in the calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -172,7 +204,7 @@ namespace FlowTask_WinForms_Frontent
             foreach (Task t in Mediator.CurrentUser.Tasks)
                 ObservableCollections.ObservableTaskCollection.Add(new SelectableTaskDecorator(t));
 
-            drawDue(DateTime.Today);
+            drawTaskDue(DateTime.Today);
         }
 
         private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -182,7 +214,7 @@ namespace FlowTask_WinForms_Frontent
             else
                 lblTasks.Text = string.Format("You have {0} task{1}!", ObservableCollections.ObservableTaskCollection.Count, (ObservableCollections.ObservableTaskCollection.Count == 1 ? "" : "s"));
 
-            drawDue(sfTaskCalendar.SelectedDate.Value);
+            drawTaskDue(sfTaskCalendar.SelectedDate.Value);
         }
 
         private void btnCreateTask_Click(object sender, EventArgs e)

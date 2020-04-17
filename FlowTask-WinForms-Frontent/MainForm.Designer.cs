@@ -36,7 +36,7 @@
             this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.btnCreateTask = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.flwTaskLayout = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,11 +149,11 @@
             // 
             // flowLayout
             // 
-            this.flowLayout.Location = new System.Drawing.Point(732, 508);
-            this.flowLayout.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayout.Name = "flowLayout";
-            this.flowLayout.Size = new System.Drawing.Size(504, 240);
-            this.flowLayout.TabIndex = 9;
+            this.flwTaskLayout.Location = new System.Drawing.Point(732, 508);
+            this.flwTaskLayout.Margin = new System.Windows.Forms.Padding(0);
+            this.flwTaskLayout.Name = "flowLayout";
+            this.flwTaskLayout.Size = new System.Drawing.Size(504, 240);
+            this.flwTaskLayout.TabIndex = 9;
             // 
             // MainPage
             // 
@@ -161,7 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1234, 748);
-            this.Controls.Add(this.flowLayout);
+            this.Controls.Add(this.flwTaskLayout);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
             this.Controls.Add(this.sfDataGrid);
@@ -193,6 +193,6 @@
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
         private System.Windows.Forms.Button btnCreateTask;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.FlowLayoutPanel flowLayout;
+        private System.Windows.Forms.FlowLayoutPanel flwTaskLayout;
     }
 }
