@@ -176,7 +176,7 @@
             this.Name = "MainPage";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "FlowTask";
-            this.Load += new System.EventHandler(this.MainPage_Load);
+            this.Load += new System.EventHandler(this.mainPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

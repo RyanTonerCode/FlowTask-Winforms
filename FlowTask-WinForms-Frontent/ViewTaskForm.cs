@@ -48,8 +48,8 @@ namespace FlowTask_WinForms_Frontent
 
             //create the diagram and set layout manager
             sfTreeDiagram.BeginUpdate();
-            DiagramAppearance();
-            PopulateNodes();
+            diagramAppearance();
+            populateNodes();
 
             var dtlm = new DirectedTreeLayoutManager(sfTreeDiagram.Model, 0, 40, 50)
             {
@@ -62,8 +62,8 @@ namespace FlowTask_WinForms_Frontent
             sfTreeDiagram.View.SelectionList.Clear();
             sfTreeDiagram.EndUpdate();
 
-            sfNodeCalendar.DrawCell += SfCalendarDrawCell;
-            sfNodeCalendar.SelectionChanged += SfCalendarOverview_SelectionChanged;
+            sfNodeCalendar.DrawCell += sfCalendarDrawCell;
+            sfNodeCalendar.SelectionChanged += sfCalendarOverview_SelectionChanged;
             sfNodeCalendar.SelectedDate = firstDate;
             sfNodeCalendar.GoToDate(firstDate);
 
@@ -74,7 +74,7 @@ namespace FlowTask_WinForms_Frontent
         /// <summary>
         /// Set the model appearance
         /// </summary>
-        private void DiagramAppearance()
+        private void diagramAppearance()
         {
             sfTreeDiagram.Model.LineStyle.LineColor = Color.LightGray;
             sfTreeDiagram.Model.RenderingStyle.SmoothingMode = SmoothingMode.HighQuality;
@@ -90,7 +90,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        string GetNodeText(FlowTask_Backend.Node node)
+        string getNodeText(FlowTask_Backend.Node node)
         {
             return string.Format("{0} due on {1}", node.Name, node.Date.ToString("dddd, dd MMMM yyyy"));
         }
@@ -98,7 +98,7 @@ namespace FlowTask_WinForms_Frontent
         /// <summary>
         /// Initialize the nodes in daigram
         /// </summary>
-        private void PopulateNodes()
+        private void populateNodes()
         {
             //get the root rode
             FlowTask_Backend.Node root = nodes[0];
@@ -110,7 +110,7 @@ namespace FlowTask_WinForms_Frontent
             rootRectangle.FillStyle.ForeColor = Color.White;
 
             //give it a label with the node text
-            Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(rootRectangle, GetNodeText(root));
+            Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(rootRectangle, getNodeText(root));
             label.FontStyle.Family = "Segoe UI";
             label.FontStyle.Size = 10;
             label.FontColorStyle.Color = Color.Black;
@@ -120,7 +120,7 @@ namespace FlowTask_WinForms_Frontent
 
             //recursively populate children
             foreach (var neighbor in myTask.Decomposition.GetNeighbors(root.NodeIndex))
-                GenerateInnerLevelNodes(rootRectangle, nodes[neighbor.NodeIndex]);
+                generateInnerLevelNodes(rootRectangle, nodes[neighbor.NodeIndex]);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace FlowTask_WinForms_Frontent
         /// <param name="LevelColor">Node's Fill color</param>
         /// <param name="connectionColor">Node's fore color</param>
         /// <param name="n">nodes level count</param>
-        private void GenerateInnerLevelNodes(Syncfusion.Windows.Forms.Diagram.Node parentRect, NodeDecorator curNode)
+        private void generateInnerLevelNodes(Syncfusion.Windows.Forms.Diagram.Node parentRect, NodeDecorator curNode)
         {
             Syncfusion.Windows.Forms.Diagram.Rectangle childRect = new Syncfusion.Windows.Forms.Diagram.Rectangle(0, 0, 120, 80);
             childRect.FillStyle.Color = Color.FromArgb(242, 242, 242);
@@ -139,17 +139,17 @@ namespace FlowTask_WinForms_Frontent
             childRect.FillStyle.ForeColor = curNode.DrawColor;
             sfTreeDiagram.Model.AppendChild(childRect);
 
-            Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(childRect, GetNodeText(curNode));
+            Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(childRect, getNodeText(curNode));
             label.FontStyle.Family = "Segoe UI";
             label.FontStyle.Size = 10;
             label.FontColorStyle.Color = Color.Black;
             childRect.Labels.Add(label);
 
-            ConnectNodes(parentRect, childRect);
+            connectNodes(parentRect, childRect);
 
             //recursively populate children
             foreach (var neighbor in myTask.Decomposition.GetNeighbors(curNode.NodeIndex))
-                GenerateInnerLevelNodes(childRect, nodes[neighbor.NodeIndex]);
+                generateInnerLevelNodes(childRect, nodes[neighbor.NodeIndex]);
 
         }
 
@@ -159,7 +159,7 @@ namespace FlowTask_WinForms_Frontent
         /// <param name="parentNode">Parent Node</param>
         /// <param name="childNode">Child node</param>
         /// <param name="connectionColor">Connector Color</param>
-        private void ConnectNodes(Syncfusion.Windows.Forms.Diagram.Node parentNode, Syncfusion.Windows.Forms.Diagram.Node childNode)
+        private void connectNodes(Syncfusion.Windows.Forms.Diagram.Node parentNode, Syncfusion.Windows.Forms.Diagram.Node childNode)
         {
             if (parentNode != null && childNode != null)
             {
@@ -205,7 +205,7 @@ namespace FlowTask_WinForms_Frontent
             var now = DateTime.Now;
 
             int number = 0;
-            foreach (var node in GetDrawListForDay(here))
+            foreach (var node in getDrawListForDay(here))
             {
                 string node_subtext = string.IsNullOrEmpty(node.Text) ? "" : string.Format("({0})", node.Text);
 
@@ -310,7 +310,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
+        private void sfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
             //show nodes due on this date
             if (sender.SelectedDate.HasValue)
@@ -325,12 +325,12 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="here"></param>
         /// <returns></returns>
-        private List<NodeDecorator> GetDrawListForDay(DateTime here)
+        private List<NodeDecorator> getDrawListForDay(DateTime here)
         {
             return nodes.Where(x => x.Date.DayOfYear == here.DayOfYear && x.Date.Year == here.Year).ToList();
         }
 
-        void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
+        private void sfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -344,7 +344,7 @@ namespace FlowTask_WinForms_Frontent
 
             DateTime here = args.Value.Value;
 
-            var drawList = GetDrawListForDay(here);
+            var drawList = getDrawListForDay(here);
 
             int startPosition = 0;
 

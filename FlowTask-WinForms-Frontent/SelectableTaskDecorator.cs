@@ -33,7 +33,7 @@ namespace FlowTask_WinForms_Frontent
             {
                 if (c != Color.FromArgb(0, 0, 0))
                     return c;
-                return (c = RandColor());
+                return (c = randColor());
             }
         }
 
@@ -45,7 +45,7 @@ namespace FlowTask_WinForms_Frontent
         /// Generate a random and unused task color
         /// </summary>
         /// <returns></returns>
-        private Color RandColor()
+        private Color randColor()
         {
             int r, g, b;
             while (true)

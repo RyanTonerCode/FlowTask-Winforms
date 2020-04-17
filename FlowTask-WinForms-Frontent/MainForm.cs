@@ -25,9 +25,9 @@ namespace FlowTask_WinForms_Frontent
             DoubleBuffered = true;
 
             //specialized drawing method to show what dates have tasks
-            sfTaskCalendar.DrawCell += SfCalendarDrawCell;
+            sfTaskCalendar.DrawCell += sfCalendarDrawCell;
             //specialized selection method to update UI to show tasks on that date
-            sfTaskCalendar.SelectionChanged += SfCalendarOverview_SelectionChanged;
+            sfTaskCalendar.SelectionChanged += sfCalendarOverview_SelectionChanged;
 
             //set the data binding
             sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
@@ -44,12 +44,12 @@ namespace FlowTask_WinForms_Frontent
             //do not allow selection
             sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
             //special painting of the rows
-            sfDataGrid.QueryCellStyle += SfDataGrid_QueryCellStyle;
+            sfDataGrid.QueryCellStyle += sfDataGrid_QueryCellStyle;
             //fill the entire grid
             sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             sfDataGrid.RowHeight = 40;
 
-            Disposed += MainPage_Disposed;
+            Disposed += mainPage_Disposed;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         public void Redraw() { sfDataGrid.Refresh(); }
 
-        private void MainPage_Disposed(object sender, EventArgs e)
+        private void mainPage_Disposed(object sender, EventArgs e)
         {
             Mediator.Logout();
         }
@@ -96,7 +96,7 @@ namespace FlowTask_WinForms_Frontent
             //show the tasks due on this day
 
             int taskNumber = 0;
-            foreach (var task in GetDrawListForDay(here))
+            foreach (var task in getDrawListForDay(here))
             {
                 Label lblInfo = new Label()
                 {
@@ -133,7 +133,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
+        private void sfCalendarOverview_SelectionChanged(SfCalendar sender, Syncfusion.WinForms.Input.Events.SelectionChangedEventArgs e)
         {
             drawTaskDue(sender.SelectedDate.Value);
         }
@@ -143,7 +143,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
+        private void sfDataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
         {
             int index = e.RowIndex - 1;
 
@@ -164,7 +164,7 @@ namespace FlowTask_WinForms_Frontent
             }
         }
 
-        private List<SelectableTaskDecorator> GetDrawListForDay(DateTime here)
+        private List<SelectableTaskDecorator> getDrawListForDay(DateTime here)
         {
             return ObservableCollections.ObservableTaskCollection.Where(x => x.SubmissionDate.DayOfYear == here.DayOfYear && x.SubmissionDate.Year == here.Year).ToList(); 
         }
@@ -174,7 +174,7 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        void SfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
+        void sfCalendarDrawCell(SfCalendar sender, Syncfusion.WinForms.Input.Events.DrawCellEventArgs args)
         {
             args.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -188,7 +188,7 @@ namespace FlowTask_WinForms_Frontent
             if (!args.Value.HasValue)
                 return;
 
-            var drawList = GetDrawListForDay(args.Value.Value);
+            var drawList = getDrawListForDay(args.Value.Value);
 
             foreach (var task in drawList)
             {
@@ -204,13 +204,13 @@ namespace FlowTask_WinForms_Frontent
 
         }
 
-        private void MainPage_Load(object sender, EventArgs e)
+        private void mainPage_Load(object sender, EventArgs e)
         {
             //greeting
             lblWelcome.Text = string.Format("Welcome to FlowTask {0}!",Mediator.CurrentUser.Username);
 
             //update count when task list is changed
-            ObservableCollections.ObservableTaskCollection.CollectionChanged += ObservableTaskCollection_CollectionChanged;
+            ObservableCollections.ObservableTaskCollection.CollectionChanged += observableTaskCollection_CollectionChanged;
 
             //generate selectable task decorators from the task list
             foreach (Task t in Mediator.CurrentUser.Tasks)
@@ -220,7 +220,7 @@ namespace FlowTask_WinForms_Frontent
             drawTaskDue(DateTime.Today);
         }
 
-        private void ObservableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void observableTaskCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //show the number of tasks remaining
             var count = ObservableCollections.ObservableTaskCollection.Count;
