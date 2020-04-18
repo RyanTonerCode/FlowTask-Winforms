@@ -30,24 +30,24 @@ namespace FlowTask_WinForms_Frontent
             sfTaskCalendar.SelectionChanged += sfCalendarOverview_SelectionChanged;
 
             //set the data binding
-            sfDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
-            sfDataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowChildViewUpdate;
+            sfTaskDataGrid.DataSource = ObservableCollections.ObservableTaskCollection;
+            sfTaskDataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowChildViewUpdate;
 
             //create columns for the data grid with the associated binding maps
-            sfDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(18, 18) });
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name", MinimumWidth = 200 });
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)", MinimumWidth = 200 });
-            sfDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date", MinimumWidth = 150 });
+            sfTaskDataGrid.Columns.Add(new GridCheckBoxColumn { MappingName = "Selected", HeaderText = "", AllowCheckBoxOnHeader = true, AllowFiltering = false, CheckBoxSize = new Size(18, 18) });
+            sfTaskDataGrid.Columns.Add(new GridTextColumn() { MappingName = "AssignmentName", HeaderText = "Assignment Name", MinimumWidth = 200 });
+            sfTaskDataGrid.Columns.Add(new GridTextColumn() { MappingName = "Category", HeaderText = "Category (Subject)", MinimumWidth = 200 });
+            sfTaskDataGrid.Columns.Add(new GridDateTimeColumn() { MappingName = "SubmissionDate", HeaderText = "Due Date", MinimumWidth = 150 });
             //set the last column to fill
-            sfDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Nodes", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
+            sfTaskDataGrid.Columns.Add(new GridTextColumn() { MappingName = "RemainingFlowSteps", HeaderText = "Remaining Nodes", AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill });
 
             //do not allow selection
-            sfDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
+            sfTaskDataGrid.SelectionMode = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.None;
             //special painting of the rows
-            sfDataGrid.QueryCellStyle += sfDataGrid_QueryCellStyle;
+            sfTaskDataGrid.QueryCellStyle += sfDataGrid_QueryCellStyle;
             //fill the entire grid
-            sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
-            sfDataGrid.RowHeight = 40;
+            sfTaskDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+            sfTaskDataGrid.RowHeight = 40;
 
             Disposed += mainPage_Disposed;
         }
@@ -55,7 +55,7 @@ namespace FlowTask_WinForms_Frontent
         /// <summary>
         /// Tell the data grid to update (especially if an observable property changed)
         /// </summary>
-        public void Redraw() { sfDataGrid.Refresh(); }
+        public void Redraw() { sfTaskDataGrid.Refresh(); }
 
         private void mainPage_Disposed(object sender, EventArgs e)
         {

@@ -47,20 +47,20 @@ namespace FlowTask_WinForms_Frontent
             }
 
             //create the diagram and set layout manager
-            sfTreeDiagram.BeginUpdate();
+            sfDecompositionDiagram.BeginUpdate();
             diagramAppearance();
             populateNodes();
 
-            var dtlm = new DirectedTreeLayoutManager(sfTreeDiagram.Model, 0, 40, 50)
+            var dtlm = new DirectedTreeLayoutManager(sfDecompositionDiagram.Model, 0, 40, 50)
             {
                 TopMargin = 1,
                 LeftMargin = 50,
                 AutoLayout = false
             };
-            sfTreeDiagram.LayoutManager = dtlm;
-            sfTreeDiagram.LayoutManager.UpdateLayout(null);
-            sfTreeDiagram.View.SelectionList.Clear();
-            sfTreeDiagram.EndUpdate();
+            sfDecompositionDiagram.LayoutManager = dtlm;
+            sfDecompositionDiagram.LayoutManager.UpdateLayout(null);
+            sfDecompositionDiagram.View.SelectionList.Clear();
+            sfDecompositionDiagram.EndUpdate();
 
             sfNodeCalendar.DrawCell += sfCalendarDrawCell;
             sfNodeCalendar.SelectionChanged += sfCalendarOverview_SelectionChanged;
@@ -76,13 +76,13 @@ namespace FlowTask_WinForms_Frontent
         /// </summary>
         private void diagramAppearance()
         {
-            sfTreeDiagram.Model.LineStyle.LineColor = Color.LightGray;
-            sfTreeDiagram.Model.RenderingStyle.SmoothingMode = SmoothingMode.HighQuality;
-            sfTreeDiagram.Model.BoundaryConstraintsEnabled = false;
-            sfTreeDiagram.View.BackgroundColor = Color.White;
-            sfTreeDiagram.View.HandleRenderer.HandleColor = Color.AliceBlue;
-            sfTreeDiagram.View.HandleRenderer.HandleOutlineColor = Color.SkyBlue;
-            sfTreeDiagram.View.SelectionList.Clear();
+            sfDecompositionDiagram.Model.LineStyle.LineColor = Color.LightGray;
+            sfDecompositionDiagram.Model.RenderingStyle.SmoothingMode = SmoothingMode.HighQuality;
+            sfDecompositionDiagram.Model.BoundaryConstraintsEnabled = false;
+            sfDecompositionDiagram.View.BackgroundColor = Color.White;
+            sfDecompositionDiagram.View.HandleRenderer.HandleColor = Color.AliceBlue;
+            sfDecompositionDiagram.View.HandleRenderer.HandleOutlineColor = Color.SkyBlue;
+            sfDecompositionDiagram.View.SelectionList.Clear();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace FlowTask_WinForms_Frontent
             label.FontColorStyle.Color = Color.Black;
             rootRectangle.Labels.Add(label);
 
-            sfTreeDiagram.Model.AppendChild(rootRectangle);
+            sfDecompositionDiagram.Model.AppendChild(rootRectangle);
 
             //recursively populate children
             foreach (var neighbor in myTask.Decomposition.GetNeighbors(root.NodeIndex))
@@ -137,7 +137,7 @@ namespace FlowTask_WinForms_Frontent
             childRect.FillStyle.Color = Color.FromArgb(242, 242, 242);
             childRect.FillStyle.Type = FillStyleType.LinearGradient;
             childRect.FillStyle.ForeColor = curNode.DrawColor;
-            sfTreeDiagram.Model.AppendChild(childRect);
+            sfDecompositionDiagram.Model.AppendChild(childRect);
 
             Syncfusion.Windows.Forms.Diagram.Label label = new Syncfusion.Windows.Forms.Diagram.Label(childRect, getNodeText(curNode));
             label.FontStyle.Family = "Segoe UI";
@@ -168,8 +168,8 @@ namespace FlowTask_WinForms_Frontent
                 lConnector.HeadDecorator.FillStyle.Color = Color.Black;
                 parentNode.CentralPort.TryConnect(lConnector.TailEndPoint);
                 childNode.CentralPort.TryConnect(lConnector.HeadEndPoint);
-                sfTreeDiagram.Model.AppendChild(lConnector);
-                sfTreeDiagram.Model.SendToBack(lConnector);
+                sfDecompositionDiagram.Model.AppendChild(lConnector);
+                sfDecompositionDiagram.Model.SendToBack(lConnector);
             }
         }
         #endregion Information

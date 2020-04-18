@@ -31,49 +31,49 @@
             this.components = new System.ComponentModel.Container();
             Syncfusion.Windows.Forms.Diagram.Binding binding2 = new Syncfusion.Windows.Forms.Diagram.Binding();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewTaskForm));
-            this.sfTreeDiagram = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
+            this.sfDecompositionDiagram = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
             this.treeModel = new Syncfusion.Windows.Forms.Diagram.Model(this.components);
             this.sfNodeCalendar = new Syncfusion.WinForms.Input.SfCalendar();
             this.flowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.sfTreeDiagram)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDecompositionDiagram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeModel)).BeginInit();
             this.SuspendLayout();
             // 
             // sfTreeDiagram
             // 
-            this.sfTreeDiagram.BackColor = System.Drawing.Color.DarkGray;
+            this.sfDecompositionDiagram.BackColor = System.Drawing.Color.DarkGray;
             binding2.DefaultConnector = null;
             binding2.DefaultNode = null;
-            binding2.Diagram = this.sfTreeDiagram;
+            binding2.Diagram = this.sfDecompositionDiagram;
             binding2.Id = null;
             binding2.Label = ((System.Collections.Generic.List<string>)(resources.GetObject("binding2.Label")));
             binding2.ParentId = null;
-            this.sfTreeDiagram.Binding = binding2;
-            this.sfTreeDiagram.Controller.Constraint = Syncfusion.Windows.Forms.Diagram.Constraints.PageEditable;
-            this.sfTreeDiagram.Controller.DefaultConnectorTool = Syncfusion.Windows.Forms.Diagram.ConnectorTool.OrgLineConnectorTool;
-            this.sfTreeDiagram.Controller.PasteOffset = new System.Drawing.SizeF(10F, 10F);
-            this.sfTreeDiagram.EnableTouchMode = false;
-            this.sfTreeDiagram.LayoutManager = null;
-            this.sfTreeDiagram.Location = new System.Drawing.Point(0, 0);
-            this.sfTreeDiagram.Margin = new System.Windows.Forms.Padding(0);
-            this.sfTreeDiagram.MetroScrollBars = true;
-            this.sfTreeDiagram.Model = this.treeModel;
-            this.sfTreeDiagram.Name = "sfTreeDiagram";
-            this.sfTreeDiagram.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("sfTreeDiagram.ScrollVirtualBounds")));
-            this.sfTreeDiagram.Size = new System.Drawing.Size(1358, 368);
-            this.sfTreeDiagram.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.sfTreeDiagram.SmartSizeBox = false;
-            this.sfTreeDiagram.TabIndex = 9;
-            this.sfTreeDiagram.Text = "diagram1";
+            this.sfDecompositionDiagram.Binding = binding2;
+            this.sfDecompositionDiagram.Controller.Constraint = Syncfusion.Windows.Forms.Diagram.Constraints.PageEditable;
+            this.sfDecompositionDiagram.Controller.DefaultConnectorTool = Syncfusion.Windows.Forms.Diagram.ConnectorTool.OrgLineConnectorTool;
+            this.sfDecompositionDiagram.Controller.PasteOffset = new System.Drawing.SizeF(10F, 10F);
+            this.sfDecompositionDiagram.EnableTouchMode = false;
+            this.sfDecompositionDiagram.LayoutManager = null;
+            this.sfDecompositionDiagram.Location = new System.Drawing.Point(0, 0);
+            this.sfDecompositionDiagram.Margin = new System.Windows.Forms.Padding(0);
+            this.sfDecompositionDiagram.MetroScrollBars = true;
+            this.sfDecompositionDiagram.Model = this.treeModel;
+            this.sfDecompositionDiagram.Name = "sfTreeDiagram";
+            this.sfDecompositionDiagram.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("sfTreeDiagram.ScrollVirtualBounds")));
+            this.sfDecompositionDiagram.Size = new System.Drawing.Size(1358, 368);
+            this.sfDecompositionDiagram.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.sfDecompositionDiagram.SmartSizeBox = false;
+            this.sfDecompositionDiagram.TabIndex = 9;
+            this.sfDecompositionDiagram.Text = "diagram1";
             // 
             // 
             // 
-            this.sfTreeDiagram.View.ClientRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.sfTreeDiagram.View.Controller = this.sfTreeDiagram.Controller;
-            this.sfTreeDiagram.View.Grid.MinPixelSpacing = 4F;
-            this.sfTreeDiagram.View.Grid.Visible = false;
-            this.sfTreeDiagram.View.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("resource.ScrollVirtualBounds")));
-            this.sfTreeDiagram.View.ZoomType = Syncfusion.Windows.Forms.Diagram.ZoomType.Center;
+            this.sfDecompositionDiagram.View.ClientRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfDecompositionDiagram.View.Controller = this.sfDecompositionDiagram.Controller;
+            this.sfDecompositionDiagram.View.Grid.MinPixelSpacing = 4F;
+            this.sfDecompositionDiagram.View.Grid.Visible = false;
+            this.sfDecompositionDiagram.View.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("resource.ScrollVirtualBounds")));
+            this.sfDecompositionDiagram.View.ZoomType = Syncfusion.Windows.Forms.Diagram.ZoomType.Center;
             // 
             // treeModel
             // 
@@ -118,7 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1358, 761);
             this.Controls.Add(this.flowLayout);
-            this.Controls.Add(this.sfTreeDiagram);
+            this.Controls.Add(this.sfDecompositionDiagram);
             this.Controls.Add(this.sfNodeCalendar);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -126,7 +126,7 @@
             this.Name = "ViewTask";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ViewTask";
-            ((System.ComponentModel.ISupportInitialize)(this.sfTreeDiagram)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfDecompositionDiagram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeModel)).EndInit();
             this.ResumeLayout(false);
 
@@ -135,7 +135,7 @@
         #endregion
 
         private Syncfusion.WinForms.Input.SfCalendar sfNodeCalendar;
-        private Syncfusion.Windows.Forms.Diagram.Controls.Diagram sfTreeDiagram;
+        private Syncfusion.Windows.Forms.Diagram.Controls.Diagram sfDecompositionDiagram;
         private Syncfusion.Windows.Forms.Diagram.Model treeModel;
         private System.Windows.Forms.FlowLayoutPanel flowLayout;
     }

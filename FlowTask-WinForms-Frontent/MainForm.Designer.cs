@@ -33,11 +33,11 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.sfTaskCalendar = new Syncfusion.WinForms.Input.SfCalendar();
-            this.sfDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.sfTaskDataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.btnCreateTask = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.flwTaskLayout = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfTaskDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -102,22 +102,22 @@
             // 
             // sfDataGrid
             // 
-            this.sfDataGrid.AccessibleName = "Table";
-            this.sfDataGrid.AllowDraggingColumns = true;
-            this.sfDataGrid.AllowFiltering = true;
-            this.sfDataGrid.AllowResizingColumns = true;
-            this.sfDataGrid.AllowResizingHiddenColumns = true;
-            this.sfDataGrid.AutoGenerateColumns = false;
-            this.sfDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
-            this.sfDataGrid.BackColor = System.Drawing.SystemColors.Window;
-            this.sfDataGrid.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sfDataGrid.Location = new System.Drawing.Point(1, 109);
-            this.sfDataGrid.Margin = new System.Windows.Forms.Padding(0);
-            this.sfDataGrid.Name = "sfDataGrid";
-            this.sfDataGrid.RowHeight = 21;
-            this.sfDataGrid.Size = new System.Drawing.Size(731, 493);
-            this.sfDataGrid.TabIndex = 1;
-            this.sfDataGrid.Text = "sfDataGrid1";
+            this.sfTaskDataGrid.AccessibleName = "Table";
+            this.sfTaskDataGrid.AllowDraggingColumns = true;
+            this.sfTaskDataGrid.AllowFiltering = true;
+            this.sfTaskDataGrid.AllowResizingColumns = true;
+            this.sfTaskDataGrid.AllowResizingHiddenColumns = true;
+            this.sfTaskDataGrid.AutoGenerateColumns = false;
+            this.sfTaskDataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+            this.sfTaskDataGrid.BackColor = System.Drawing.SystemColors.Window;
+            this.sfTaskDataGrid.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sfTaskDataGrid.Location = new System.Drawing.Point(1, 109);
+            this.sfTaskDataGrid.Margin = new System.Windows.Forms.Padding(0);
+            this.sfTaskDataGrid.Name = "sfDataGrid";
+            this.sfTaskDataGrid.RowHeight = 21;
+            this.sfTaskDataGrid.Size = new System.Drawing.Size(731, 493);
+            this.sfTaskDataGrid.TabIndex = 1;
+            this.sfTaskDataGrid.Text = "sfDataGrid1";
             // 
             // btnCreateTask
             // 
@@ -164,7 +164,7 @@
             this.Controls.Add(this.flwTaskLayout);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCreateTask);
-            this.Controls.Add(this.sfDataGrid);
+            this.Controls.Add(this.sfTaskDataGrid);
             this.Controls.Add(this.sfTaskCalendar);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnView);
@@ -177,7 +177,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "FlowTask";
             this.Load += new System.EventHandler(this.mainPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sfTaskDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,7 +190,7 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnDelete;
         private Syncfusion.WinForms.Input.SfCalendar sfTaskCalendar;
-        private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid sfTaskDataGrid;
         private System.Windows.Forms.Button btnCreateTask;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.FlowLayoutPanel flwTaskLayout;
