@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FlowTask_WinForms_Frontent
+namespace FlowTask_WinForms_Frontend
 {
     /// <summary>
     /// A mediator between all the forms in the application

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace FlowTask_WinForms_Frontent
+namespace FlowTask_WinForms_Frontend
 {
     /// <summary>
     /// Decorator that allows tasks to be selected in the grid view and associated with a given color

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace FlowTask_WinForms_Frontent
+namespace FlowTask_WinForms_Frontend
 {
     /// <summary>
     /// Decorates a node with a draw color

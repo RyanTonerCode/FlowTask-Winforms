@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace FlowTask_WinForms_Frontent
+namespace FlowTask_WinForms_Frontend
 {
     /// <summary>
     /// Collections of observable elements to be used by the GUI

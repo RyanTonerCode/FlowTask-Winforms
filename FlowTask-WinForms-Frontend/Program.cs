@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace FlowTask_WinForms_Frontent
+namespace FlowTask_WinForms_Frontend
 {
     static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace FlowTask_WinForms_Frontent
+﻿namespace FlowTask_WinForms_Frontend
 {
     partial class RegistrationForm
     {
