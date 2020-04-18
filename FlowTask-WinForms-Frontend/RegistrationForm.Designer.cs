@@ -96,7 +96,7 @@
             this.tbxConfirmPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxConfirmPassword.Location = new System.Drawing.Point(208, 269);
             this.tbxConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxConfirmPassword.MaxLength = 10;
+            this.tbxConfirmPassword.MaxLength = 30;
             this.tbxConfirmPassword.Name = "tbxConfirmPassword";
             this.tbxConfirmPassword.Size = new System.Drawing.Size(289, 29);
             this.tbxConfirmPassword.TabIndex = 5;

@@ -71,7 +71,7 @@ namespace FlowTask_WinForms_Frontent
 
             //All fields are validated
 
-            User temp_user = new User(username, firstName, lastName, email, pass);
+            User temp_user = new User(pass, username, firstName, lastName, email);
 
             //write the user to the database
             (bool Succeeded, string ErrorMessage) = DatabaseController.GetDBController().WriteUser(temp_user);
