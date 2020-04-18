@@ -29,7 +29,7 @@ namespace FlowTask_WinForms_Frontent
         /// <summary>
         /// Represents a class that is used to find the licensing file for Syncfusion controls.
         /// </summary>
-        public class DemoCommon
+        private class DemoCommon
         {
 
             /// <summary>
