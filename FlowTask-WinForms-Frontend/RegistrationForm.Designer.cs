@@ -75,7 +75,7 @@
             this.tbxEmail.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxEmail.Location = new System.Drawing.Point(208, 175);
             this.tbxEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxEmail.MaxLength = 30;
+            this.tbxEmail.MaxLength = 35;
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(289, 29);
             this.tbxEmail.TabIndex = 3;
@@ -96,7 +96,7 @@
             this.tbxConfirmPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxConfirmPassword.Location = new System.Drawing.Point(208, 269);
             this.tbxConfirmPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxConfirmPassword.MaxLength = 30;
+            this.tbxConfirmPassword.MaxLength = 35;
             this.tbxConfirmPassword.Name = "tbxConfirmPassword";
             this.tbxConfirmPassword.Size = new System.Drawing.Size(289, 29);
             this.tbxConfirmPassword.TabIndex = 5;
@@ -118,7 +118,7 @@
             this.tbxLastName.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxLastName.Location = new System.Drawing.Point(208, 127);
             this.tbxLastName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxLastName.MaxLength = 30;
+            this.tbxLastName.MaxLength = 35;
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.Size = new System.Drawing.Size(289, 29);
             this.tbxLastName.TabIndex = 2;
@@ -129,7 +129,7 @@
             this.tbxFirstName.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxFirstName.Location = new System.Drawing.Point(208, 80);
             this.tbxFirstName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxFirstName.MaxLength = 30;
+            this.tbxFirstName.MaxLength = 35;
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.Size = new System.Drawing.Size(289, 29);
             this.tbxFirstName.TabIndex = 1;
@@ -160,7 +160,7 @@
             this.tbxPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPassword.Location = new System.Drawing.Point(208, 220);
             this.tbxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxPassword.MaxLength = 30;
+            this.tbxPassword.MaxLength = 35;
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.Size = new System.Drawing.Size(289, 29);
             this.tbxPassword.TabIndex = 4;
@@ -182,7 +182,7 @@
             this.tbxUsername.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUsername.Location = new System.Drawing.Point(208, 33);
             this.tbxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbxUsername.MaxLength = 30;
+            this.tbxUsername.MaxLength = 35;
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(289, 29);
             this.tbxUsername.TabIndex = 0;

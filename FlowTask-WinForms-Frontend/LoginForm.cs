@@ -12,8 +12,8 @@ namespace FlowTask_WinForms_Frontend
             StartPosition = FormStartPosition.CenterScreen;
 
             //default credentials
-            tbxUsername.Text = "Default User";
-            tbxPassword.Text = "password";
+            tbxUsername.Text = "default user";
+            tbxPassword.Text = "a really strong password";
         }
 
         /// <summary>
