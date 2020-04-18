@@ -35,7 +35,7 @@
     <SuiteName>FlowTaskFrontend</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -234,9 +234,9 @@
       <DependentUpon>ViewTaskForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="FlowTask-WinForms-Frontend_TemporaryKey.pfx" />
-    <AdditionalFiles Include="flowtaskdb.db">
+    <None Include="flowtaskdb.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AdditionalFiles>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
