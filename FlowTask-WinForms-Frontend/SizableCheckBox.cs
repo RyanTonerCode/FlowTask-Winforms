@@ -17,6 +17,7 @@ namespace FlowTask_WinForms_Frontent
         public SizableCheckBox()
         {
             AutoSize = false;
+            Cursor = Cursors.Hand;
         }
 
         protected override void OnPaint(PaintEventArgs e)
