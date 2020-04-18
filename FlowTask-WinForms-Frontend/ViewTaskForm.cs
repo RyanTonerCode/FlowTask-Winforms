@@ -38,8 +38,7 @@ namespace FlowTask_WinForms_Frontent
             DateTime firstDate = DateTime.Now;
             if (myTask != null)
             {
-                
-                Text = string.Format("View Task: {0} - {1} Nodes Remaining", myTask.AssignmentName, myTask.RemainingFlowSteps);
+
                 foreach (var n in myTask.Decomposition.Nodes)
                     nodes.Add(new NodeDecorator(n));
 
@@ -179,7 +178,8 @@ namespace FlowTask_WinForms_Frontent
 
         private void drawNodesDue(DateTime here)
         {
-            Text = string.Format("View Task: {0} - {1} Nodes Remaining", myTask.AssignmentName, myTask.RemainingFlowSteps);
+            int nodesRemain = myTask.RemainingFlowSteps;
+            Text = string.Format("View Task: {0} - {1} Node{2} Remaining", myTask.AssignmentName, nodesRemain, Mediator.IsPlural(nodesRemain));
 
             flowLayout.FlowDirection = FlowDirection.TopDown;
 

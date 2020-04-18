@@ -209,6 +209,8 @@ namespace FlowTask_WinForms_Frontent
             //greeting
             lblWelcome.Text = string.Format("Welcome to FlowTask {0}!",Mediator.CurrentUser.Username);
 
+            Text = string.Format("Connected to FlowTask as {0}", Mediator.CurrentUser.Username);
+
             //update count when task list is changed
             ObservableCollections.ObservableTaskCollection.CollectionChanged += observableTaskCollection_CollectionChanged;
 
