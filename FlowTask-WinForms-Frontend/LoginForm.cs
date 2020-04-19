@@ -47,6 +47,11 @@ namespace FlowTask_WinForms_Frontend
                 return;
             }
 
+            #if LOCALDB
+                    DatabaseController.GetDBController(true);
+            #endif
+
+
             (User user, AuthorizationCookie? ac) = DatabaseController.GetDBController().GetUser(username, password);
 
 
