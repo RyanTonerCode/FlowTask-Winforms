@@ -4,11 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowTask-WinForms-Frontend", "FlowTask-WinForms-Frontend\FlowTask-WinForms-Frontend.csproj", "{21F4929D-6C6E-4111-AAE7-E97D09E572EC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{70063882-DE25-4DD9-9F72-0B01651DCB8E} = {70063882-DE25-4DD9-9F72-0B01651DCB8E}
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowTask-Backend", "..\FlowTask-Backend\FlowTask-Backend\FlowTask-Backend.csproj", "{70063882-DE25-4DD9-9F72-0B01651DCB8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowTask-Backend-Stub", "FlowTask-Backend-Stub\FlowTask-Backend-Stub.csproj", "{2A7C30F6-E4C1-486F-BAFF-D261FC915BF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +17,10 @@ Global
 		{21F4929D-6C6E-4111-AAE7-E97D09E572EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21F4929D-6C6E-4111-AAE7-E97D09E572EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21F4929D-6C6E-4111-AAE7-E97D09E572EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70063882-DE25-4DD9-9F72-0B01651DCB8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70063882-DE25-4DD9-9F72-0B01651DCB8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70063882-DE25-4DD9-9F72-0B01651DCB8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70063882-DE25-4DD9-9F72-0B01651DCB8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7C30F6-E4C1-486F-BAFF-D261FC915BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7C30F6-E4C1-486F-BAFF-D261FC915BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7C30F6-E4C1-486F-BAFF-D261FC915BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7C30F6-E4C1-486F-BAFF-D261FC915BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

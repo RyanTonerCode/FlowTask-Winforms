@@ -91,9 +91,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FlowTask_Backend">
-      <HintPath>..\..\FlowTask-Backend\FlowTask-Backend\bin\Debug\FlowTask_Backend.dll</HintPath>
-    </Reference>
     <Reference Include="Syncfusion.Core.WinForms, Version=18.1460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Core.WinForms.18.1.0.44\lib\net46\Syncfusion.Core.WinForms.dll</HintPath>
     </Reference>
@@ -267,9 +264,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FlowTask-Backend\FlowTask-Backend\FlowTask-Backend.csproj">
-      <Project>{70063882-DE25-4DD9-9F72-0B01651DCB8E}</Project>
-      <Name>FlowTask-Backend</Name>
+    <ProjectReference Include="..\FlowTask-Backend-Stub\FlowTask-Backend-Stub.csproj">
+      <Project>{2a7c30f6-e4c1-486f-baff-d261fc915bf4}</Project>
+      <Name>FlowTask-Backend-Stub</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
