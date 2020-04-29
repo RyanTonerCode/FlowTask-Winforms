@@ -22,7 +22,7 @@ namespace FlowTask_WinForms_Frontend
             Mediator.LoginForm = entry_loginForm;
             Mediator.RegistrationForm = new RegistrationForm();
             Mediator.MainForm = new MainForm();
-
+            
             Application.Run(entry_loginForm);
         }
 
