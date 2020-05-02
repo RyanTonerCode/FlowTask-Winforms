@@ -57,7 +57,7 @@ namespace FlowTask_Backend
         public (User user, AuthorizationCookie? ac) GetUser(string username, string password)
         {
             var ac = getAuthCookie();
-            User user = new User(password,username,"Bob","Marley","Bob.Marley@raeggae.com");
+            User user = new User("",username,"John","Doe","John.Doe@gmail.com");
             return (user, ac);
         }
 

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationCookie.cs" />
-    <Compile Include="DatabaseController.cs" />
+    <Compile Include="DatabaseControllerStub.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
